@@ -21,59 +21,64 @@ public class MapFigureData
     }
 
 
-    public Guid   guid       { get; private set; } = Guid.NewGuid();
-    public Type   figureType { get; private set; } = Type.NONE;
-    public int[,] shape      { get; private set; } = new int[3,3];
+    public Guid            guid       { get; private set; } = Guid.NewGuid();
+    public Type            figureType { get; private set; } = Type.NONE;
+    public List<List<int>> shape      { get; private set; } = new List<List<int>>();
 
 
     public MapFigureData( Type type = Type.NONE )
     {
         figureType = type;
-        shape = getShapeByType( type );
+        shape =getShapeByType( type );
     }
 
-    private int[,] getShapeByType( Type type )
+    private List<List<int>> getShapeByType( Type type )
     {
         switch ( type )
         {
-        case Type.L:    return new int[,]
+        case Type.L:    return new List<List<int>>
         {
-            { 1, 0, 0 },
-            { 1, 0, 0 },
-            { 1, 1, 0 }
+           new() { 1, 1, 1 }, //1, 0, 0
+           new() { 1, 0, 0 }, //1, 0, 0
+           new() { 0, 0, 0 }  //1, 1, 0
         };
-        case Type.J:    return new int[,]
+        case Type.J:    return new List<List<int>>
         {
-            { 0, 1, 0 },
-            { 0, 1, 0 },
-            { 1, 1, 0 }
+           new() { 1, 0, 0 }, //0, 1, 0
+           new() { 1, 1, 1 }, //0, 1, 0
+           new() { 0, 0, 0 }, //1, 1, 0
         };
-        case Type.O:    return new int[,]
+        case Type.O:    return new List<List<int>>
         {
-            { 0, 0, 0 },
-            { 1, 1, 0 },
-            { 1, 1, 0 }
+           new() { 1, 1, 0 }, //0, 0, 0
+           new() { 1, 1, 0 }, //1, 1, 0
+           new() { 0, 0, 0 }, //1, 1, 0
         };
-        case Type.I:    return new int[,]
+        case Type.I:    return new List<List<int>>
         {
-            { 1, 0, 0 },
-            { 1, 0, 0 },
-            { 1, 0, 0 }
+           new() { 1, 1, 1 }, //1, 0, 0
+           new() { 0, 0, 0 }, //1, 0, 0
+           new() { 0, 0, 0 }, //1, 0, 0
         };
-        case Type.S:    return new int[,]
+        case Type.S:    return new List<List<int>>
         {
-            { 0, 0, 0 },
-            { 0, 1, 1 },
-            { 1, 1, 0 }
+           new() { 1, 0, 0 }, //0, 0, 0
+           new() { 1, 1, 0 }, //0, 1, 1
+           new() { 0, 1, 0 }, //1, 1, 0
         };
-        case Type.Z:    return new int[,]
+        case Type.Z:    return new List<List<int>>
         {
-            { 0, 0, 0 },
-            { 1, 1, 0 },
-            { 0, 1, 1 }
+           new() { 0, 1, 0 }, //0, 0, 0
+           new() { 1, 1, 0 }, //1, 1, 0
+           new() { 1, 0, 0 }, //0, 1, 1
         };
 
-        default:        return new int[3,3];
+        default:        return new List<List<int>>
+        {
+            new() { 0, 0, 0 },
+            new() { 0, 0, 0 },
+            new() { 0, 0, 0 }
+        };
         }
     }
 }
