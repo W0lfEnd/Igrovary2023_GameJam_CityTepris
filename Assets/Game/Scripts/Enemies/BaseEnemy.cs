@@ -18,12 +18,12 @@ namespace Enemies
         private bool _isDamageIncreased;
 
         private float _defaultMovementSpeed;
-        [SerializeField] private float _currentMovementSpeed; //currently serialized for testing
+        private float _currentMovementSpeed; //currently serialized for testing
         private bool _isMovementSpeedIncreased;
 
         private Dimension _currentDimension;
-        [SerializeField] private GameObject _closestBuilding; //currently serialized for testing
-        [SerializeField] private DamageClicker _damageClicker;//currently serialized for testing
+        private GameObject _closestBuilding; //currently serialized for testing
+        private DamageClicker _damageClicker;//currently serialized for testing
         private BuildingsDistancer _buildingsDistancer;
 
         private void Update()
