@@ -339,6 +339,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 166263676}
   _currentMovementSpeed: 0.89
   _closestBuilding: {fileID: 329269104}
+  _damageClicker: {fileID: 1953532243}
 --- !u!4 &166263679
 Transform:
   m_ObjectHideFlags: 0
@@ -551,6 +552,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 866513396}
   _currentMovementSpeed: 1.2
   _closestBuilding: {fileID: 329269104}
+  _damageClicker: {fileID: 1953532243}
 --- !u!4 &866513399
 Transform:
   m_ObjectHideFlags: 0
@@ -679,6 +681,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 1054591937}
   _currentMovementSpeed: 0.5
   _closestBuilding: {fileID: 329269104}
+  _damageClicker: {fileID: 1953532243}
 --- !u!4 &1054591940
 Transform:
   m_ObjectHideFlags: 0
@@ -807,6 +810,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 1060991103}
   _currentMovementSpeed: 0.1
   _closestBuilding: {fileID: 329269104}
+  _damageClicker: {fileID: 1953532243}
 --- !u!4 &1060991106
 Transform:
   m_ObjectHideFlags: 0
@@ -833,6 +837,7 @@ GameObject:
   - component: {fileID: 1103034668}
   - component: {fileID: 1103034667}
   - component: {fileID: 1103034666}
+  - component: {fileID: 1103034669}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -906,6 +911,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1103034669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103034665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1458621160
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -1086,6 +1108,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 1844846651}
   _currentMovementSpeed: 0.333
   _closestBuilding: {fileID: 329269104}
+  _damageClicker: {fileID: 1953532243}
 --- !u!4 &1844846654
 Transform:
   m_ObjectHideFlags: 0
@@ -1214,6 +1237,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 1908436511}
   _currentMovementSpeed: 0.1555
   _closestBuilding: {fileID: 329269104}
+  _damageClicker: {fileID: 1953532243}
 --- !u!4 &1908436514
 Transform:
   m_ObjectHideFlags: 0
@@ -1228,6 +1252,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1953532242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1953532244}
+  - component: {fileID: 1953532243}
+  m_Layer: 0
+  m_Name: DamagableClicker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1953532243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953532242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a68616f3fa7c9fd448cfb118668f8f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentClickDamage: 1
+--- !u!4 &1953532244
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953532242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.44307306, y: -0.117971525, z: -0.114652}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &2086058918 stripped
 RectTransform:
@@ -1347,6 +1416,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 2134891283}
   _currentMovementSpeed: 0.78
   _closestBuilding: {fileID: 329269104}
+  _damageClicker: {fileID: 1953532243}
 --- !u!4 &2134891286
 Transform:
   m_ObjectHideFlags: 0

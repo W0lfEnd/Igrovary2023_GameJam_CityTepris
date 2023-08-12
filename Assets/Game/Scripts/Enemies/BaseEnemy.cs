@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace Enemies
 {
-    public class BaseEnemy : MonoBehaviour, IPointerEnterHandler
+    public class BaseEnemy : MonoBehaviour, IPointerDownHandler
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BoxCollider2D _boxCollider;
@@ -18,12 +18,12 @@ namespace Enemies
         private bool _isDamageIncreased;
 
         private float _defaultMovementSpeed;
-        [SerializeField] private float _currentMovementSpeed; //currently serializer for testing
+        [SerializeField] private float _currentMovementSpeed; //currently serialized for testing
         private bool _isMovementSpeedIncreased;
 
         private Dimension _currentDimension;
-        [SerializeField] private GameObject _closestBuilding; //currently serializer for testing
-        private DamageClicker _damageClicker;
+        [SerializeField] private GameObject _closestBuilding; //currently serialized for testing
+        [SerializeField] private DamageClicker _damageClicker;//currently serialized for testing
         private BuildingsDistancer _buildingsDistancer;
 
         private void Update()
@@ -32,7 +32,7 @@ namespace Enemies
         }
 
         //to damage by click
-        public void OnPointerEnter(PointerEventData eventData)
+        public void OnPointerDown(PointerEventData eventData)
         {
             Damage(_damageClicker._currentClickDamage);
         }
