@@ -6,11 +6,13 @@ namespace Game.Scripts.GameBoardLogic.Board
 {
     public class Board : MonoBehaviour
     {
+        [SerializeField] private HighlightTile highlightTilePrefab;
         [SerializeField] private Vector2Int BoardDimensions;
         [SerializeField] private int TileSize;
 
         private BoardTile[,] _firstTiles;
         private BoardTile[,] _secondTiles;
+        private HighlightTile[,] _highlightTiles;
 
 
         private void Start()
@@ -18,10 +20,24 @@ namespace Game.Scripts.GameBoardLogic.Board
             InitializeBoard();
         }
 
+        [ContextMenu(nameof(InitializeBoard))]
         public void InitializeBoard()
         {
             _firstTiles = new BoardTile[BoardDimensions.x, BoardDimensions.y];
             _secondTiles = new BoardTile[BoardDimensions.x, BoardDimensions.y];
+            _highlightTiles = new HighlightTile[BoardDimensions.x, BoardDimensions.y];
+
+            IterateABoard(_firstTiles, ((index, tile) =>
+            {
+                Vector3 position = GetTileWorldPositionByIndex(index);
+                HighlightTile highlighter = Instantiate(highlightTilePrefab, position, Quaternion.identity, transform);
+
+                _highlightTiles[index.x, index.y] = highlighter;
+
+                highlighter.HighlightAsAllowed();
+
+                return true;
+            }));
         }
 
         public bool CanPlaceInTile(Dimension dimension, Vector3 worldPosition)
@@ -89,7 +105,7 @@ namespace Game.Scripts.GameBoardLogic.Board
             indexOnBoard.y += 1;
 
             Vector3 center = transform.position;
-            center += new Vector3(indexOnBoard.x * (TileSize / 2.0f), indexOnBoard.y * (TileSize / 2.0f), 0);
+            center += new Vector3(indexOnBoard.x * (TileSize), indexOnBoard.y * (TileSize), 0);
 
             return center;
         }
@@ -100,7 +116,7 @@ namespace Game.Scripts.GameBoardLogic.Board
             {
                 for (int x = 0; x < BoardDimensions.x; x++)
                 {
-                    BoardTile tile = board[y, x];
+                    BoardTile tile = board[x, y];
 
                     if (!action(new Vector2Int(x, y), tile))
                         return;
