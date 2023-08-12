@@ -40,6 +40,24 @@ namespace Game.Scripts.GameBoardLogic.Board
             }));
         }
 
+        public void ClearHighlights()
+        {
+            foreach (var highlight in _highlightTiles)
+            {
+                highlight.Hide();
+            }
+        }
+
+        public void HighlightAsAllowed(Dimension dimension, Vector2Int index)
+        {
+            
+        }
+        
+        public void HighlightAsDisAllowed(Dimension dimension, Vector2Int index)
+        {
+            
+        }
+
         public bool CanPlaceInTile(Dimension dimension, Vector3 worldPosition)
         {
             Vector2Int? OptionalIndex = GetBoardIndexByWorldPosition(worldPosition);
