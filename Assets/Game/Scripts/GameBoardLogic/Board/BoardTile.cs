@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace Game.Scripts.GameBoardLogic.Board
 {
-    public class TileHighlighter : MonoBehaviour
+    public class BoardTile : MonoBehaviour
     {
-        
     }
 }
