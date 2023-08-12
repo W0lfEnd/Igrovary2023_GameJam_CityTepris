@@ -20,6 +20,14 @@ namespace Game.Scripts.GameBoardLogic.Board
             InitializeBoard();
         }
 
+        private void OnDestroy()
+        {
+            foreach (var highlight in _highlightTiles)
+            {
+                Destroy(highlight);
+            }
+        }
+
         [ContextMenu(nameof(InitializeBoard))]
         public void InitializeBoard()
         {
@@ -50,12 +58,12 @@ namespace Game.Scripts.GameBoardLogic.Board
 
         public void HighlightAsAllowed(Dimension dimension, Vector2Int index)
         {
-            
+            _highlightTiles[index.x, index.y].HighlightAsAllowed();
         }
-        
+
         public void HighlightAsDisAllowed(Dimension dimension, Vector2Int index)
         {
-            
+            _highlightTiles[index.x, index.y].HighlightAsDisAllowed();
         }
 
         public bool CanPlaceInTile(Dimension dimension, Vector3 worldPosition)
@@ -71,9 +79,9 @@ namespace Game.Scripts.GameBoardLogic.Board
             bool isBlockedInUnderworld = _secondTiles[Index.x, Index.y] != null;
 
             if (dimension == Dimension.TopDimesion)
-                return isBlockedInUnderworld;
+                return !isBlockedInUnderworld;
             else
-                return isBlockedInOverworld;
+                return !isBlockedInOverworld;
         }
 
         public bool SetNewTileIn(Dimension dimension, BoardTile tile, Vector2Int boardIndex)
@@ -93,6 +101,8 @@ namespace Game.Scripts.GameBoardLogic.Board
                 return false;
 
             tiles[boardIndex.x, boardIndex.y] = tile;
+            tile.transform.SetParent(transform);
+            tile.transform.localPosition = new Vector3(boardIndex.x + 1, boardIndex.y + 1, 0);
 
             return true;
         }
