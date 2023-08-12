@@ -37,6 +37,11 @@ namespace Enemies
             Damage(_damageClicker._currentClickDamage);
         }
 
+        public void SetClosestBuilding(GameObject target)
+        {
+            _closestBuilding = target;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             //do damage to the building, destroy this object and then return to pool?

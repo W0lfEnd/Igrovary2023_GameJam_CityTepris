@@ -78,8 +78,9 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < waveConfig.EnemiesCount; i++)
         {
             BaseEnemy enemy = Instantiate(EnemyPrefab, GetRandomPointInASpawnRadius(), Quaternion.identity);
-
+            
             enemy.Initialize(waveConfig.EnemyConfig, SpanwerDimension, clicker, distancer);
+            enemy.SetClosestBuilding(gameObject);
             WaveConfig[waveIndex].SpawnedEnemies.Add(enemy);
         }
     }
