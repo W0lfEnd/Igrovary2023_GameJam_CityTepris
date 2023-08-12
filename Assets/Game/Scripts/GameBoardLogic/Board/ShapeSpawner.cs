@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Game.Scripts.GameBoardLogic.Board
@@ -12,14 +14,21 @@ namespace Game.Scripts.GameBoardLogic.Board
 
     public class ShapeSpawner : MonoBehaviour
     {
+        [SerializeField] private GameObject ItemPrefab;
         [SerializeField] private BuildShape[] Shapes;
         [SerializeField] private float SpawnCoolDown;
 
         private Unity.Mathematics.Random _random;
+        private List<GameObject> SpawnedInstances;
+        private float _lastTimeSpawned;
+
+        public Action<ShapeSpawner> OnFigureSpawned;
+
 
         public void Start()
         {
             _random = new Unity.Mathematics.Random(1);
+            SpawnedInstances = new List<GameObject>();
         }
 
         private void Update()
@@ -31,6 +40,25 @@ namespace Game.Scripts.GameBoardLogic.Board
 
             if (SpawnCoolDown <= 0.0f)
             {
+            }
+        }
+
+        private void SpawnNextShape()
+        {
+            foreach (var oldInstance in SpawnedInstances)
+            {
+                Destroy(oldInstance);
+            }
+
+            BuildShape shape = GenerateNextShape();
+
+            foreach (Vector2Int point in shape.points)
+            {
+                Vector3 position = new Vector3(point.x, point.y, 0.0f);
+
+                GameObject instance = Instantiate(ItemPrefab, position, quaternion.identity, transform);
+
+                SpawnedInstances.Add(instance);
             }
         }
 
