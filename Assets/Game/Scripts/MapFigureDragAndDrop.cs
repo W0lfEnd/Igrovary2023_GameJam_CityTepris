@@ -9,9 +9,11 @@ using Random = UnityEngine.Random;
 
 public class MapFigureDragAndDrop : MonoBehaviour
 {
+    public event Action<MapFigureData> onClicked = delegate {};
+
     [SerializeField] private MapFigureGenerator figureGenerator = null;
-    [SerializeField] private Tilemap tilemap = null;
-    [SerializeField] private Tile figurePieceTile = null;
+    [SerializeField] private Tilemap            tilemap         = null;
+    [SerializeField] private Tile               figurePieceTile = null;
 
     private MapFigureData figureData = null;
 
@@ -31,6 +33,11 @@ public class MapFigureDragAndDrop : MonoBehaviour
     {
         if ( figureData == null )
             return;
+
+        if ( Input.GetMouseButton( 0 ) )
+        {
+            onClicked?.Invoke( figureData );
+        }
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint( Input.mousePosition );
         tilemap.transform.position = new Vector3( worldPos.x, worldPos.y, tilemap.transform.position.z );
@@ -68,4 +75,7 @@ public class MapFigureDragAndDrop : MonoBehaviour
 
         tilemap.RefreshAllTiles();
     }
+    
+    
+    
 }
