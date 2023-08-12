@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -33,12 +34,36 @@ public class AllyTurret : MonoBehaviour
 
     private void Update()
     {
-        
+        TimeToNextShot += Time.deltaTime;
+        if ( TimeToNextShot > AttackEveryMs )
+        {
+            var enemiesInRange = Physics2D.OverlapCircleAll( transform.position, AttackRange );
+            if ( enemiesInRange.Any() )
+            {
+                var closestEnemy = enemiesInRange.Aggregate( ( cur, min ) =>
+                {
+                    float distToCur = Vector2.Distance( cur.transform.position, transform.position );
+                    float distToMin =  Vector2.Distance( min.transform.position, transform.position );
+                    return distToCur < distToMin ? cur : min;
+                } );
+
+                spawnProjectile( closestEnemy.transform );
+            }
+
+        }
+            
     }
 
     private void spawnProjectile( Transform target )
     {
         var bullet = projectilesPool.Get();
-        bullet.init( target, ProjectileSpeed, () => projectilesPool.Release( bullet ) );
+        bullet.init( target, Damage, ProjectileSpeed, () => projectilesPool.Release( bullet ) );
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere( transform.position, AttackRange );
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere( transform.position, TimeToNextShot / AttackEveryMs );
     }
 }

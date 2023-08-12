@@ -9,16 +9,18 @@ using Object = UnityEngine.Object;
 public class AllyTurretProjectile : MonoBehaviour
 {
     private Transform target      = null;
-    private Action onCollision = null;
-    private float  speed       = 1f;
+    private Action    onCollision = null;
+    private float     damage      = 1f;
+    private float     speed       = 1f;
 
 
-    public void init( Transform target, float speed, Action onCollision = null )
+    public void init( Transform target, float damage, float speed, Action onCollision = null )
     {
-        this.target = target;
+        this.target      = target;
         this.onCollision = onCollision;
-        this.speed = speed;
-        this.enabled = true;
+        this.damage      = damage;
+        this.speed       = speed;
+        this.enabled     = true;
     }
 
     private void Update()
