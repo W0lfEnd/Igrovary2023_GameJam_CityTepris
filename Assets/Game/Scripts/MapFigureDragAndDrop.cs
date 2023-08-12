@@ -42,17 +42,30 @@ public class MapFigureDragAndDrop : MonoBehaviour
         if ( this.figureData == figureData )
             return;
 
-        tilemap.ClearAllTiles();
-        for ( int i = 0; i < figureData.shape.GetLength( 0 ); i++ )
+        if ( figureData == null )
         {
-            for ( int j = 0; j < figureData.shape.GetLength( 1 ); j++ )
-            {
-                if ( figureData.shape[i, j] == 0 )
-                    continue;
+            tilemap.ClearAllTiles();
+            return;
+        }
 
+        this.figureData = figureData;
+        
+        // 1, 0, 0
+        // 1, 0, 1
+        // 1, 1, 1
+
+        tilemap.ClearAllTiles();
+        for ( int i = figureData.shape.Count - 1; i >= 0; i-- )
+        {
+            for ( int j = 0; j < figureData.shape[i].Count; j++ )
+            {
+                if ( figureData.shape[i][j] == 0 )
+                    continue;
+        
                 tilemap.SetTile( new Vector3Int( i, j, 0 ), figurePieceTile );
-                tilemap.RefreshAllTiles();
             }
         }
+
+        tilemap.RefreshAllTiles();
     }
 }
