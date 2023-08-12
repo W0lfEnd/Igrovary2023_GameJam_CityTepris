@@ -27,7 +27,8 @@ public class AllyTurret : MonoBehaviour
                 return obj;
             }
           , obj => { obj.gameObject.SetActive( true ); }
-          , obj => { obj.gameObject.SetActive( false ); }
+          , obj => { obj.gameObject.SetActive( false ); },
+            defaultCapacity: 100
         );
     }
 
