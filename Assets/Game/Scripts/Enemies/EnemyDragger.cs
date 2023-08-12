@@ -16,7 +16,7 @@ namespace Enemies
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            _enemy.isDragged = true;
+            _enemy.SetActiveDragging(true);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -27,7 +27,7 @@ namespace Enemies
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            _enemy.isDragged = false;
+            _enemy.SetActiveDragging(false);
         }
     }
 }

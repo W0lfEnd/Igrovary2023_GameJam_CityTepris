@@ -17,7 +17,6 @@ struct WaveConfig
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private BaseEnemy EnemyPrefab;
-    [SerializeField] private DamageClicker clicker;
     [SerializeField] private BuildingsDistancer distancer;
 
     [SerializeField] private float SpawnRadius;
@@ -79,8 +78,7 @@ public class EnemySpawner : MonoBehaviour
         {
             BaseEnemy enemy = Instantiate(EnemyPrefab, GetRandomPointInASpawnRadius(), Quaternion.identity);
             
-            enemy.Initialize(waveConfig.EnemyConfig, SpanwerDimension, clicker, distancer);
-            enemy.SetClosestBuilding(gameObject);
+            enemy.Initialize(waveConfig.EnemyConfig, SpanwerDimension, distancer);
             WaveConfig[waveIndex].SpawnedEnemies.Add(enemy);
         }
     }

@@ -8,8 +8,9 @@ namespace Enemies
     public class BaseEnemy : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private BoxCollider2D _boxCollider;
+
         [Header("Don't touch this, this is SOLID")]
+        public BoxCollider2D boxCollider;
         public bool isDragged = false;
 
         private int _health;
@@ -27,60 +28,28 @@ namespace Enemies
         private GameObject _closestBuildingTarget;
         private BuildingsDistancer _buildingsDistancer;
 
-        private void Awake()
-        {
-            gameObject.SetActive(false);
-            _boxCollider.enabled = false;
-        }
+        private void Awake() => Validate();
 
-        private void Update()
-        {
-            TryToMoveTowardsClosestBuilding();
-        }
-
-        public void SetClosestBuilding(GameObject target)
-        {
-            _closestBuildingTarget = target;
-        }
+        private void Update() => TryToMoveTowardsClosestBuilding();
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             //do damage to the building, deactivate this object and then return to pool?
         }
 
-        public void Initialize(EnemyData enemyData, Dimension spawnDimension, DamageClicker damageClicker, BuildingsDistancer buildingsDistancer)
+        public void Initialize(EnemyData enemyData, Dimension spawnDimension, BuildingsDistancer buildingsDistancer)
         {
-            isDragged = false;
-            _boxCollider.enabled = false;
-
             SetData(enemyData, spawnDimension);
             ConfigurateTarget(buildingsDistancer);
 
             gameObject.SetActive(true);
-            _boxCollider.enabled = true;
+            boxCollider.enabled = true;
         }
 
-        private void SetData(EnemyData enemyData, Dimension spawnDimension)
+        public void SetActiveDragging(bool isActive)
         {
-            gameObject.name = enemyData.name;
-
-            _spriteRenderer.sprite = enemyData.sprite;
-            
-            _health = enemyData.health;
-
-            _defaultDamage = enemyData.damage;
-            _currentDamage = enemyData.damage;
-
-            _defaultMovementSpeed = enemyData.movementSpeed;
-            _currentMovementSpeed = enemyData.movementSpeed;
-
-            _currentDimension = spawnDimension;
-        }
-
-        private void ConfigurateTarget(BuildingsDistancer buildingsDistancer)
-        {
-            _closestBuildingTarget = buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
-            buildingsDistancer.onBuild += TrySetNewClosestBuilding;
+            isDragged = isActive;
+            boxCollider.enabled = !isActive;
         }
 
         public void Damage(int damage)
@@ -136,6 +105,36 @@ namespace Enemies
             }
         }
 
+        private void Validate()
+        {
+            isDragged = false;
+            boxCollider.enabled = false;
+        }
+
+        private void SetData(EnemyData enemyData, Dimension spawnDimension)
+        {
+            gameObject.name = enemyData.name;
+
+            _spriteRenderer.sprite = enemyData.sprite;
+
+            _health = enemyData.health;
+
+            _defaultDamage = enemyData.damage;
+            _currentDamage = enemyData.damage;
+
+            _defaultMovementSpeed = enemyData.movementSpeed;
+            _currentMovementSpeed = enemyData.movementSpeed;
+
+            _currentDimension = spawnDimension;
+        }
+
+        private void ConfigurateTarget(BuildingsDistancer buildingsDistancer)
+        {
+            _buildingsDistancer = buildingsDistancer;
+            _closestBuildingTarget = _buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
+            _buildingsDistancer.onBuild += TrySetNewClosestBuilding;
+        }
+
         private void TryToMoveTowardsClosestBuilding()
         {
             if (isDragged)
@@ -163,7 +162,7 @@ namespace Enemies
 
         private void Destroy()
         {
-            _buildingsDistancer.onBuild += TrySetNewClosestBuilding;
+            _buildingsDistancer.onBuild -= TrySetNewClosestBuilding;
             gameObject.SetActive(false);
         }
 

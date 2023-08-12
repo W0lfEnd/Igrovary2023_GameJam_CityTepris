@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 7442011811191696145}
-  _boxCollider: {fileID: 7442011811191696146}
+  boxCollider: {fileID: 7442011811191696146}
   isDragged: 0
 --- !u!114 &259103481525072821
 MonoBehaviour:
