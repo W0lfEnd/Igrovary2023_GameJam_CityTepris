@@ -29,7 +29,8 @@ Transform:
   m_LocalPosition: {x: 0.24, y: -0.14, z: -0.114652}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3566100081296255575}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,3 +103,65 @@ MonoBehaviour:
   AttackEveryMs: 300
   ProjectileSpeed: 10
   AttackRange: 2.52
+--- !u!1001 &1640113758586922028
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3668255930790589433}
+    m_Modifications:
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409207151265235097, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+      propertyPath: m_Name
+      value: Upgrade1_BladeStorm
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+--- !u!4 &3566100081296255575 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2864166111688674939, guid: 448a402d6aec47c4f96570c495edc816, type: 3}
+  m_PrefabInstance: {fileID: 1640113758586922028}
+  m_PrefabAsset: {fileID: 0}
