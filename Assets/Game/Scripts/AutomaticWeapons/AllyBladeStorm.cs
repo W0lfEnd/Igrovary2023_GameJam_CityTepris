@@ -19,6 +19,10 @@ public class AllyBladeStorm : MonoBehaviour
 
     private List<AllyBladeStorm_Blade> bladesList = new List<AllyBladeStorm_Blade>();
 
+    private void OnEnable()
+    {
+        initBlades();
+    }
 
     public void init( int bladesCount = 5 )
     {
@@ -37,6 +41,9 @@ public class AllyBladeStorm : MonoBehaviour
 
     private void initBlades()
     {
+        if ( bladesList.Count == 0 )
+            return;
+
         float radianBladeOffset = 2 * Mathf.PI / bladesList.Count;
         for ( int i = 0; i < bladesList.Count; i++ )
         {
