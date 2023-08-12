@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enemies;
 using UnityEngine;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
@@ -8,13 +9,15 @@ using Object = UnityEngine.Object;
 
 public class AllyTurretProjectile : MonoBehaviour
 {
-    private Transform target      = null;
+    private float deltaDistanceToApplyDmg = 0.1f;
+
+    private BaseEnemy target      = null;
     private Action    onCollision = null;
     private float     damage      = 1f;
     private float     speed       = 1f;
 
 
-    public void init( Transform target, float damage, float speed, Action onCollision = null )
+    public void init( BaseEnemy target, float damage, float speed, Action onCollision = null )
     {
         this.target      = target;
         this.onCollision = onCollision;
@@ -27,20 +30,17 @@ public class AllyTurretProjectile : MonoBehaviour
     {
         if ( target == null )
         {
-            onCollision?.Invoke();
             enabled = false;
+            onCollision?.Invoke();
         }
 
-        transform.Translate( (target.position - transform.position).normalized * (speed * Time.deltaTime) );
-    }
+        transform.up = target.transform.position - transform.position;
+        transform.Translate( (target.transform.position - transform.position).normalized * (speed * Time.deltaTime), Space.World );
 
-    private void OnCollisionEnter2D( Collision2D col )
-    {
-        Object targetComponent = null; //col.gameObject.GetComponent<>();
-        if ( targetComponent != null )
+        if ( deltaDistanceToApplyDmg > Vector2.Distance( transform.position, target.transform.position ) )
         {
-            //do damage
-            onCollision();
+            target.Damage( (int)damage );
+            onCollision?.Invoke();
         }
     }
 }
