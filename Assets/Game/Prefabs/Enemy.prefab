@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7442011811191696151}
   - component: {fileID: 7442011811191696144}
+  - component: {fileID: 259103481525072821}
   - component: {fileID: 7442011811191696145}
   - component: {fileID: 7442011811191696146}
   m_Layer: 0
@@ -48,6 +49,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 7442011811191696145}
   _boxCollider: {fileID: 7442011811191696146}
+  isDragged: 0
+--- !u!114 &259103481525072821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7442011811191696147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 431956c69411eb54190de7b4bd5ba31b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 7442011811191696144}
 --- !u!212 &7442011811191696145
 SpriteRenderer:
   m_ObjectHideFlags: 0

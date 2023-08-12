@@ -2,14 +2,15 @@ using Clicker;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Enemies
 {
-    public class BaseEnemy : MonoBehaviour, IPointerDownHandler
+    public class BaseEnemy : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BoxCollider2D _boxCollider;
+        [Header("Don't touch this, this is SOLID")]
+        public bool isDragged = false;
 
         private int _health;
 
@@ -18,28 +19,28 @@ namespace Enemies
         private bool _isDamageIncreased;
 
         private float _defaultMovementSpeed;
-        private float _currentMovementSpeed; //currently serialized for testing
+        private float _currentMovementSpeed;
         private bool _isMovementSpeedIncreased;
 
         private Dimension _currentDimension;
-        private GameObject _closestBuilding; //currently serialized for testing
-        private DamageClicker _damageClicker;//currently serialized for testing
+
+        private GameObject _closestBuildingTarget;
         private BuildingsDistancer _buildingsDistancer;
+
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+            _boxCollider.enabled = false;
+        }
 
         private void Update()
         {
             TryToMoveTowardsClosestBuilding();
         }
 
-        //to damage by click
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            Damage(_damageClicker._currentClickDamage);
-        }
-
         public void SetClosestBuilding(GameObject target)
         {
-            _closestBuilding = target;
+            _closestBuildingTarget = target;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -49,18 +50,17 @@ namespace Enemies
 
         public void Initialize(EnemyData enemyData, Dimension spawnDimension, DamageClicker damageClicker, BuildingsDistancer buildingsDistancer)
         {
-            SetData(enemyData);
+            isDragged = false;
+            _boxCollider.enabled = false;
 
-            _currentDimension = spawnDimension;
-            _damageClicker = damageClicker;
-            _buildingsDistancer = buildingsDistancer;
+            SetData(enemyData, spawnDimension);
+            ConfigurateTarget(buildingsDistancer);
 
-            _closestBuilding = buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
-
-            buildingsDistancer.onBuild += TrySetNewClosestBuilding;
+            gameObject.SetActive(true);
+            _boxCollider.enabled = true;
         }
 
-        private void SetData(EnemyData enemyData)
+        private void SetData(EnemyData enemyData, Dimension spawnDimension)
         {
             gameObject.name = enemyData.name;
 
@@ -73,6 +73,14 @@ namespace Enemies
 
             _defaultMovementSpeed = enemyData.movementSpeed;
             _currentMovementSpeed = enemyData.movementSpeed;
+
+            _currentDimension = spawnDimension;
+        }
+
+        private void ConfigurateTarget(BuildingsDistancer buildingsDistancer)
+        {
+            _closestBuildingTarget = buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
+            buildingsDistancer.onBuild += TrySetNewClosestBuilding;
         }
 
         public void Damage(int damage)
@@ -80,12 +88,9 @@ namespace Enemies
             _health -= damage;
 
             if (_health <= 0)
+            {
                 Destroy();
-        }
-
-        public void Destroy()
-        {
-            gameObject.SetActive(false);
+            }
         }
 
         public void IncreaseHealth(int additionalHealth)
@@ -133,15 +138,18 @@ namespace Enemies
 
         private void TryToMoveTowardsClosestBuilding()
         {
-            if (_closestBuilding == null)
+            if (isDragged)
                 return;
 
-            Vector2 direction = _closestBuilding.transform.position - transform.position;
+            if (_closestBuildingTarget == null)
+                return;
+
+            Vector2 direction = _closestBuildingTarget.transform.position - transform.position;
             direction.Normalize();
 
             //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            transform.position = Vector2.MoveTowards(transform.position, _closestBuilding.transform.position, _currentMovementSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _closestBuildingTarget.transform.position, _currentMovementSpeed * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
 
@@ -150,7 +158,13 @@ namespace Enemies
             if (buildingDimension != _currentDimension)
                 return;
 
-            _closestBuilding = _buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
+            _closestBuildingTarget = _buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
+        }
+
+        private void Destroy()
+        {
+            _buildingsDistancer.onBuild += TrySetNewClosestBuilding;
+            gameObject.SetActive(false);
         }
 
         private IEnumerator DelayedAction(float delay, Action callback)
