@@ -50,14 +50,13 @@ public class AllyTurret : MonoBehaviour
                     return distToCur < distToMin ? cur : min;
                 } );
 
-                spawnProjectile( closestEnemy );
+                shotTo( closestEnemy );
             }
 
         }
-            
     }
 
-    private void spawnProjectile( BaseEnemy target )
+    private void shotTo( BaseEnemy target )
     {
         var bullet = projectilesPool.Get();
         bullet.transform.position = transform.position;
