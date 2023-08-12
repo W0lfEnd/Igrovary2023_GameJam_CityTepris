@@ -38,9 +38,9 @@ public class MapFigureData
         {
         case Type.L:    return new int[,]
         {
-            { 0, 1, 0 },
-            { 0, 1, 0 },
-            { 0, 1, 1 }
+            { 1, 0, 0 },
+            { 1, 0, 0 },
+            { 1, 1, 0 }
         };
         case Type.J:    return new int[,]
         {
@@ -51,14 +51,14 @@ public class MapFigureData
         case Type.O:    return new int[,]
         {
             { 0, 0, 0 },
-            { 0, 1, 1 },
-            { 0, 1, 1 }
+            { 1, 1, 0 },
+            { 1, 1, 0 }
         };
         case Type.I:    return new int[,]
         {
-            { 0, 1, 0 },
-            { 0, 1, 0 },
-            { 0, 1, 0 }
+            { 1, 0, 0 },
+            { 1, 0, 0 },
+            { 1, 0, 0 }
         };
         case Type.S:    return new int[,]
         {

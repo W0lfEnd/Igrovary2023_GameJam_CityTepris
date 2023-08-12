@@ -32,12 +32,12 @@ public class MapFigureGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        curTimerMs += Time.deltaTime;
+        curTimerMs += Time.deltaTime * 1000;
 
         if ( curTimerMs > generateEveryMs )
         {
-            onNewFigure?.Invoke(new MapFigureData( getRandomFigureType() ));
             curTimerMs = 0.0f;
+            onNewFigure?.Invoke(new MapFigureData( getRandomFigureType() ));
         }
     }
 
