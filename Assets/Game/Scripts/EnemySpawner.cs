@@ -1,20 +1,27 @@
 using System;
 using System.Collections.Generic;
+using Clicker;
+using Enemies;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 [Serializable]
 struct WaveConfig
 {
-    public GameObject EnemyPrefab;
+    public EnemyData EnemyConfig;
     public float EnemiesCount;
     public float WaveDuration;
-    public List<GameObject> SpawnedEnemies;
+    public List<Component> SpawnedEnemies;
 }
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] private BaseEnemy EnemyPrefab;
+    [SerializeField] private DamageClicker clicker;
+    [SerializeField] private BuildingsDistancer distancer;
+
     [SerializeField] private float SpawnRadius;
+    [SerializeField] private Dimension SpanwerDimension;
     [SerializeField] private WaveConfig[] WaveConfig;
 
     private float WavesTimeProgresss;
@@ -66,12 +73,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnWaveEnemies(int waveIndex)
     {
-        WaveConfig config = WaveConfig[waveIndex];
+        WaveConfig waveConfig = WaveConfig[waveIndex];
 
-        for (int i = 0; i < config.EnemiesCount; i++)
+        for (int i = 0; i < waveConfig.EnemiesCount; i++)
         {
-            GameObject enemy = Instantiate(config.EnemyPrefab, GetRandomPointInASpawnRadius(), Quaternion.identity);
+            BaseEnemy enemy = Instantiate(EnemyPrefab, GetRandomPointInASpawnRadius(), Quaternion.identity);
 
+            enemy.Initialize(waveConfig.EnemyConfig, SpanwerDimension, clicker, distancer);
             WaveConfig[waveIndex].SpawnedEnemies.Add(enemy);
         }
     }
