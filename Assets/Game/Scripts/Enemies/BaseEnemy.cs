@@ -44,7 +44,7 @@ namespace Enemies
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            //do damage to the building, destroy this object and then return to pool?
+            //do damage to the building, deactivate this object and then return to pool?
         }
 
         public void Initialize(EnemyData enemyData, Dimension spawnDimension, DamageClicker damageClicker, BuildingsDistancer buildingsDistancer)

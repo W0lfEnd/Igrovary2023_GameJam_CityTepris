@@ -7,8 +7,26 @@ public class BuildingsDistancer : MonoBehaviour
 {
     public Action<Dimension> onBuild;
 
+    [SerializeField] private GameObject _topMainBuilding;
+    [SerializeField] private GameObject _bottomMainBuilding;
     private List<GameObject> _topBuildings = new();
     private List<GameObject> _bottomBuildings = new();
+
+    private void Awake() => Initialize(); //delete this after subscribing on game start event
+
+    private void Initialize() //subscrive on game start event
+    {
+        Validate();
+
+        _topBuildings.Add(_topMainBuilding);
+        _bottomBuildings.Add(_bottomMainBuilding);
+    }
+
+    private void Validate()
+    {
+        _topBuildings.Clear();
+        _bottomBuildings.Clear();
+    }
 
     private void AddBuilding(GameObject building, Dimension buildingDimension) //subscribe onBuild action
     {
