@@ -1,3 +1,4 @@
+using Game.Scripts.GameBoardLogic.Board;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,10 +12,15 @@ namespace Game.Scripts.UI
         private Color _emptyColor = new Color(0f, 0f, 0f, 0f);
         private Color _normalColor = new Color(255f, 255f, 255f, 1f);
 
-        private void Show(Vector2Int[] vectors)
+        private void Awake()
+        {
+            ShapeSpawner.OnFigureSpawned += (spawner) => Show(spawner.PeekNextShape());
+        }
+
+        private void Show(BuildShape buildingShape)
         {
             Clear();
-            ConfigurateTiles(vectors);
+            ConfigurateTiles(buildingShape.points);
         }
 
         private void ConfigurateTiles(Vector2Int[] vectors)
