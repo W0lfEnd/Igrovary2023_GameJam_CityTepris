@@ -63,7 +63,8 @@ public class AllyTurret : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere( transform.position, AttackRange );
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere( transform.position, AttackRange );
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere( transform.position, TimeToNextShot / AttackEveryMs );
     }
