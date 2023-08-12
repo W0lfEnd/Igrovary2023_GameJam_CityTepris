@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class BuildingsDistancer : MonoBehaviour
 {
-    public Action<GameObject, Dimension> onBuild;
+    public Action<Dimension> onBuild;
+
     private List<GameObject> _topBuildings = new();
     private List<GameObject> _bottomBuildings = new();
 
-    public void AddBuilding(GameObject building, Dimension buildingDimension)
+    private void AddBuilding(GameObject building, Dimension buildingDimension) //subscribe onBuild action
     {
         switch (buildingDimension)
         {
@@ -31,25 +32,46 @@ public class BuildingsDistancer : MonoBehaviour
         }
     }
 
-    public void TryGetClosestBuilding(BaseEnemy enemy, Dimension enemyDimension)
+    public GameObject TryGetClosestBuilding(BaseEnemy enemy, Dimension enemyDimension)
     {
-        //if (_buildings.Count < 1)
-        //    return null;
+        List<GameObject> buildings = GetDimensionBuildings(enemyDimension);
 
-        //GameObject closestBuilding = _buildings[0];
-        //float closestBuildingDistance = Vector2.Distance(enemy.gameObject.transform.position, _buildings[0].transform.position);
+        if (buildings.Count < 1)
+            return null;
 
-        //for (int i = 0; i < _buildings.Count; i++)
-        //{
-        //    float nextBuildingDistance = Vector2.Distance(enemy.gameObject.transform.position, _buildings[i].transform.position);
+        GameObject closestBuilding = buildings[0];
+        float closestBuildingDistance = Vector2.Distance(enemy.gameObject.transform.position, buildings[0].transform.position);
 
-        //    if (nextBuildingDistance < closestBuildingDistance)
-        //    {
-        //        closestBuilding = _buildings[i];
-        //        closestBuildingDistance = nextBuildingDistance;
-        //    }
-        //}
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            float nextBuildingDistance = Vector2.Distance(enemy.gameObject.transform.position, buildings[i].transform.position);
 
-        //return closestBuilding;
+            if (nextBuildingDistance < closestBuildingDistance)
+            {
+                closestBuilding = buildings[i];
+                closestBuildingDistance = nextBuildingDistance;
+            }
+        }
+
+        return closestBuilding;
+    }
+
+    private List<GameObject> GetDimensionBuildings(Dimension dimension)
+    {
+        switch (dimension)
+        {
+            case Dimension.TopDimesion:
+                {
+                    return _topBuildings;
+                }
+            case Dimension.BottomDimension:
+                {
+                    return _bottomBuildings;
+                }
+            default:
+                {
+                    return _topBuildings;
+                }
+        }
     }
 }

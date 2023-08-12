@@ -24,6 +24,7 @@ namespace Enemies
         private Dimension _currentDimension;
         [SerializeField] private GameObject _closestBuilding; //currently serializer for testing
         private DamageClicker _damageClicker;
+        private BuildingsDistancer _buildingsDistancer;
 
         private void Update()
         {
@@ -47,7 +48,11 @@ namespace Enemies
 
             _currentDimension = spawnDimension;
             _damageClicker = damageClicker;
-            //_closestBuilding = buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
+            _buildingsDistancer = buildingsDistancer;
+
+            _closestBuilding = buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
+
+            buildingsDistancer.onBuild += TrySetNewClosestBuilding;
         }
 
         private void SetData(EnemyData enemyData)
@@ -135,12 +140,12 @@ namespace Enemies
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
 
-        private void TrySetNewClosestBuilding(GameObject newBuilding, Dimension buildingDimension)
+        private void TrySetNewClosestBuilding(Dimension buildingDimension)
         {
             if (buildingDimension != _currentDimension)
                 return;
 
-
+            _closestBuilding = _buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
         }
 
         private IEnumerator DelayedAction(float delay, Action callback)
