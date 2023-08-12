@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class MapFigureGenerator : MonoBehaviour
 {
     public event Action<MapFigureData> onNewFigure = delegate {};
+    public event Action<bool> onEnabled = delegate {};
 
     
     [SerializeField] private float generateEveryMs = 3000.0f;
@@ -19,11 +20,13 @@ public class MapFigureGenerator : MonoBehaviour
     {
         enabled = true;
         curTimerMs = 0.0f;
+        onEnabled( true );
     }
 
     public void stopGenerating()
     {
         enabled = false;
+        onEnabled( false );
     }
 
     // Update is called once per frame
