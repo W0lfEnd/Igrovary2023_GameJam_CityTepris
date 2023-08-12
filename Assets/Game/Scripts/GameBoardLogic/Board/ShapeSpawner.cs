@@ -149,17 +149,18 @@ namespace Game.Scripts.GameBoardLogic.Board
 
         private BuildShape GenerateNextShape()
         {
-            return GenerateShape(_random);
+            return GenerateShape(ref _random);
         }
 
         public BuildShape PeekNextShape()
         {
-            return GenerateShape(new Unity.Mathematics.Random(_random.state));
+            Unity.Mathematics.Random randomCopy = _random;
+            return GenerateShape(ref randomCopy);
         }
 
-        private BuildShape GenerateShape(Unity.Mathematics.Random random)
+        private BuildShape GenerateShape(ref Unity.Mathematics.Random random)
         {
-            int index = random.NextInt(Shapes.Length - 1);
+            int index = random.NextInt(Shapes.Length);
 
             return Shapes[index];
         }
