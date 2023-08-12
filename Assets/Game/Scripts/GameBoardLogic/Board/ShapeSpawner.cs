@@ -22,7 +22,7 @@ namespace Game.Scripts.GameBoardLogic.Board
         private List<GameObject> SpawnedInstances;
         private float _lastTimeSpawned;
 
-        public Action<ShapeSpawner> OnFigureSpawned;
+        public static Action<ShapeSpawner> OnFigureSpawned;
 
 
         public void Start()
