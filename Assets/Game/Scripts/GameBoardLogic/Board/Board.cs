@@ -93,8 +93,8 @@ namespace Game.Scripts.GameBoardLogic.Board
             else
                 tiles = _secondTiles;
 
-            bool isIndexInsideABoard = boardIndex.x > 0
-                                       && boardIndex.y > 0
+            bool isIndexInsideABoard = boardIndex.x >= 0
+                                       && boardIndex.y >= 0
                                        && boardIndex.x <= BoardDimensions.x
                                        && boardIndex.y <= BoardDimensions.y;
             if (!isIndexInsideABoard)
