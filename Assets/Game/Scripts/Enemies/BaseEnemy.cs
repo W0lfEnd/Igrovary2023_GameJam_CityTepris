@@ -18,11 +18,11 @@ namespace Enemies
         private bool _isDamageIncreased;
 
         private float _defaultMovementSpeed;
-        private float _currentMovementSpeed;
+        [SerializeField] private float _currentMovementSpeed; //currently serializer for testing
         private bool _isMovementSpeedIncreased;
 
         private Dimension _currentDimension;
-        private GameObject _closestBuilding;
+        [SerializeField] private GameObject _closestBuilding; //currently serializer for testing
         private DamageClicker _damageClicker;
 
         private void Update()
@@ -41,7 +41,16 @@ namespace Enemies
             //do damage to the building, destroy this object and then return to pool?
         }
 
-        public void SetData(EnemyData enemyData, Dimension spawnDimension, DamageClicker damageClicker)
+        public void Initialize(EnemyData enemyData, Dimension spawnDimension, DamageClicker damageClicker, BuildingsDistancer buildingsDistancer)
+        {
+            SetData(enemyData);
+
+            _currentDimension = spawnDimension;
+            _damageClicker = damageClicker;
+            //_closestBuilding = buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
+        }
+
+        private void SetData(EnemyData enemyData)
         {
             gameObject.name = enemyData.name;
 
@@ -54,8 +63,14 @@ namespace Enemies
 
             _defaultMovementSpeed = enemyData.movementSpeed;
             _currentMovementSpeed = enemyData.movementSpeed;
+        }
 
-            _currentDimension = spawnDimension;
+        public void Damage(int damage)
+        {
+            _health -= damage;
+
+            if (_health <= 0)
+                Destroy();
         }
 
         public void Destroy()
@@ -114,18 +129,18 @@ namespace Enemies
             Vector2 direction = _closestBuilding.transform.position - transform.position;
             direction.Normalize();
 
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
             transform.position = Vector2.MoveTowards(transform.position, _closestBuilding.transform.position, _currentMovementSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+            //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
 
-        public void Damage(int damage)
+        private void TrySetNewClosestBuilding(GameObject newBuilding, Dimension buildingDimension)
         {
-            _health -= damage;
+            if (buildingDimension != _currentDimension)
+                return;
 
-            if (_health <= 0)
-                Destroy();
+
         }
 
         private IEnumerator DelayedAction(float delay, Action callback)
