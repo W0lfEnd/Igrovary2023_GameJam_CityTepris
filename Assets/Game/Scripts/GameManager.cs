@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemies;
 using Game.Scripts;
+using Game.Scripts.GameBoardLogic.Board;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [SerializeField] private UIUpgradePanel upgradePanel = null;
+    
 
     void Awake()
     {
@@ -36,6 +38,39 @@ public class GameManager : MonoBehaviour
         InitializeDimensionMusicTheme();
 
         onLvlChanged += newLvl => upgradePanel.tryToOpenPanel();
+        Board.OnBoardChanged += ( firstList, secondList ) =>
+        {
+           if ( this == null || !this )
+              return;
+
+           cityBlockCount = firstList.Count + secondList.Count;
+        };
+
+    }
+
+    private float          timer_to_give_xp = 0f;
+    public  int            _cityBlockCount  = 0;
+    public  event Action<int> cityBlocksCountChanged  = delegate {  };
+    public int cityBlockCount
+    {
+       get => _cityBlockCount;
+       private set
+       {
+          _cityBlockCount = value;
+          cityBlocksCountChanged( _cityBlockCount );
+       }
+    }
+
+    public int   xpPerCityBlockPerSecond = 1;
+
+    private void Update()
+    {
+       timer_to_give_xp += Time.deltaTime;
+       if ( timer_to_give_xp > 1f )
+       {
+          timer_to_give_xp = 0;
+          xp += cityBlockCount * xpPerCityBlockPerSecond;
+       }
     }
 
     public bool IsUpgradesPanelActive()
@@ -101,6 +136,9 @@ public class GameManager : MonoBehaviour
 
    public int xpToLvl( int amount )
    {
+      if ( amount >= 1200 )
+         return amount / 200;
+
       if ( amount >= 1000 )
          return 4;
 
@@ -127,7 +165,7 @@ public class GameManager : MonoBehaviour
          case 4:  return 700;
          case 5:  return 1000;
 
-         default: return 99999999;
+         default: return lvl * 200;
       }
    }
 

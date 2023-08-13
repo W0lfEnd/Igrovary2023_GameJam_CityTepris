@@ -178,7 +178,7 @@ namespace Enemies
             _buildingsDistancer.onBuild -= TrySetNewClosestBuilding;
             gameObject.SetActive(false);
 
-            GameManager.Instance.xp += 8;
+            //GameManager.Instance.xp += 8;
         }
 
         private void SetActiveAnimation(bool isActive)
