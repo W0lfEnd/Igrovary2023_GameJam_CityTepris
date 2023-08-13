@@ -18,7 +18,7 @@ public class AllyBladeStorm_Blade : MonoBehaviour
     this.damage = damage;
   }
 
-  private void OnCollisionEnter2D( Collision2D col )
+  private void OnTriggerEnter2D( Collider2D col )
   {
     BaseEnemy enemy = col.gameObject.GetComponent<BaseEnemy>();
     if ( enemy )
