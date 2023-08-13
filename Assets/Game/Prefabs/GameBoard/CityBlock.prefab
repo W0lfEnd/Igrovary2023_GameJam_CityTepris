@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildParticlePrefab: {fileID: 2583158238511213181, guid: a29d31d29e4970e4cac6e751a9f5e30e, type: 3}
-  linkParticlePrefab: {fileID: 0}
+  linkParticlePrefab: {fileID: 5853111763755563873, guid: 1065ffdeeff6b2247b59ca9c18515119, type: 3}
   OverworldSprite: {fileID: 21300000, guid: 186dde0290af24874b06ad059575d7b3, type: 3}
   UnderworldSprite: {fileID: 21300000, guid: 50a2087d8047d46e692886787ea3f17d, type: 3}
 --- !u!61 &7182898318555175935

@@ -109,23 +109,24 @@ namespace Game.Scripts.GameBoardLogic.Board
             BoardTile[,] tiles;
             Transform parent;
             Dimension world;
-            BuildType buildType;
+            BoardTile linkedTile = null;
             bool isBlockedInOverworld = _firstTiles[boardIndex.x, boardIndex.y] != null;
             bool isBlockedInUnderworld = _secondTiles[boardIndex.x, boardIndex.y] != null;
+            bool isLinkBuild = false;
 
             if (isBlockedInOverworld)
             {
-                buildType = BuildType.BuiltOnAnotherTile;
+                linkedTile = _firstTiles[boardIndex.x, boardIndex.y];
                 world = Dimension.BottomDimension;
                 if (isBlockedInUnderworld)
                     return false;
 
                 tiles = _secondTiles;
                 parent = UnderworldTilesRoot;
+                isLinkBuild = true;
             }
             else
             {
-                buildType = BuildType.BuiltOnFreeTile;
                 world = Dimension.TopDimesion;
                 tiles = _firstTiles;
                 parent = OverworldTilesRoot;
@@ -135,7 +136,13 @@ namespace Game.Scripts.GameBoardLogic.Board
             tile.transform.SetParent(parent);
             tile.transform.localPosition = new Vector3(boardIndex.x + 1, boardIndex.y + 1, 0);
 
-            tile.OnBuilt(world, buildType);
+            tile.OnBuilt(world);
+
+            if (isLinkBuild)
+            {
+                tile.OnLinked();
+                linkedTile.OnLinked();
+            }
 
             return true;
         }

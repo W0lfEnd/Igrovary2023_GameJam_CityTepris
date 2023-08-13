@@ -3,12 +3,6 @@ using UnityEngine;
 
 namespace Game.Scripts.GameBoardLogic.Board
 {
-    public enum BuildType
-    {
-        BuiltOnFreeTile,
-        BuiltOnAnotherTile
-    }
-
     public class BoardTile : MonoBehaviour
     {
         [SerializeField] private GameObject buildParticlePrefab;
@@ -16,7 +10,7 @@ namespace Game.Scripts.GameBoardLogic.Board
         [SerializeField] private Sprite OverworldSprite;
         [SerializeField] private Sprite UnderworldSprite;
 
-        public void OnBuilt(Dimension world, BuildType buildType)
+        public void OnBuilt(Dimension world)
         {
             var renderer = GetComponent<SpriteRenderer>();
             GetComponent<Collider2D>().enabled = true;
@@ -26,22 +20,14 @@ namespace Game.Scripts.GameBoardLogic.Board
             else
                 renderer.sprite = UnderworldSprite;
 
-            if (buildType == BuildType.BuiltOnFreeTile)
-                OnBuildInFreeTile();
-            if (buildType == BuildType.BuiltOnAnotherTile)
-                OnBuildOnAnotherTile();
-        }
-
-        private void OnBuildInFreeTile()
-        {
             if (buildParticlePrefab != null)
                 Instantiate(buildParticlePrefab).transform.position = transform.position;
         }
 
-        private void OnBuildOnAnotherTile()
+        public void OnLinked()
         {
-            if (buildParticlePrefab != null)
-                Instantiate(buildParticlePrefab).transform.position = transform.position;
+            if (linkParticlePrefab != null)
+                Instantiate(linkParticlePrefab).transform.position = transform.position;
         }
     }
 }
