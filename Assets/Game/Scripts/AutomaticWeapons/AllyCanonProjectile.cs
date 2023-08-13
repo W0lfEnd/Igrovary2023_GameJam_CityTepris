@@ -72,6 +72,8 @@ public class AllyCanonProjectile : MonoBehaviour
                             .DOScale( explosionScale * Vector3.one, explosionDuration )
                             .Play();
 
+        SoundsManager.Instance.TryPlaySoundByType(SoundType.CannonExplosion);
+
         tweener_explosion.onComplete += () =>
         {
             go_explosion_collider.SetActive( false );

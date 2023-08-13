@@ -68,3 +68,9 @@ MonoBehaviour:
   - type: 5
     audioClips:
     - {fileID: 8300000, guid: 94aec6c34e470ec4795ee7ab2824a86c, type: 3}
+  - type: 6
+    audioClips:
+    - {fileID: 8300000, guid: 71df127073f6ffd478c6fde3749be2f7, type: 3}
+  - type: 7
+    audioClips:
+    - {fileID: 8300000, guid: 14c25d1528d7827498548ae5dc091180, type: 3}
