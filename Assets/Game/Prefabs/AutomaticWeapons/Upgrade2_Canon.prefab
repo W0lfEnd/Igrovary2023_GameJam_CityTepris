@@ -51,7 +51,7 @@ MonoBehaviour:
   _AttackEveryMs: 1500
   _ProjectileSpeed: 3
   _AttackRange: 3
-  _ExplosionRange: 4
+  _ExplosionRange: 6
 --- !u!120 &3428081711049996402
 LineRenderer:
   m_ObjectHideFlags: 0
