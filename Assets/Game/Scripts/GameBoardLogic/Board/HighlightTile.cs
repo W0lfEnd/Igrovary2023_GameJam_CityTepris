@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Game.Scripts.GameBoardLogic.Board
 {
-    [RequireComponent(typeof(SpriteRenderer))]
     public class HighlightTile : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer renderer;
         [SerializeField] private Sprite AllowedSprite;
         [SerializeField] private Sprite DisAllowedSprite;
 
@@ -12,7 +12,7 @@ namespace Game.Scripts.GameBoardLogic.Board
         {
             gameObject.SetActive(true);
 
-            GetComponent<SpriteRenderer>().sprite = AllowedSprite;
+            renderer.sprite = AllowedSprite;
         }
 
         public void HighlightAsDisAllowed()
