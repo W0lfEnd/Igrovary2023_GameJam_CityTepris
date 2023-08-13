@@ -164,14 +164,39 @@ public class UIUpgradePanel : MonoBehaviour
                 description = () => "+1 в секунду",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttacksPerSecond++  )
             },
-            [14] = new ()
+            [15] = new ()
             {
-                id = 14,
+                id = 15,
                 sprite = sprites[6],
                 title = "Пришвидшити 'Арбалету'",
                 description = () => "+1 в секунду",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttacksPerSecond++  )
             },
+            [16] = new ()
+            {
+                id = 16,
+                sprite = sprites[1],
+                title = "Збільшити радіус 'Ріжучих лез'",
+                description = () => "+50%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.AttackRadius *= 1.3f )
+            },
+            [17] = new ()
+            {
+                id = 17,
+                sprite = sprites[1],
+                title = "Збільшити радіус 'Ріжучих лез'",
+                description = () => "+50%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.AttackRadius *= 1.5f )
+            },
+            [18] = new ()
+            {
+                id = 18,
+                sprite = sprites[1],
+                title = "Пришвидшити 'Ріжучі леза'",
+                description = () => "+50%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.RotationSpeedInDeg *= 1.5f )
+            },
+            
         };
 
         List<int> available_to_upgrade_list = mocks.Keys.Where( canUpgrade ).Where( it => !alreadyUpgraded.Contains( it ) ).ToList();
@@ -207,6 +232,7 @@ public class UIUpgradePanel : MonoBehaviour
         {
             case 0: return !turretsController.blade_storm.gameObject.activeSelf;
             case 1: return !turretsController.canon.gameObject.activeSelf;
+
             case 2: return turretsController.blade_storm.gameObject.activeSelf;
 
             case 5: return turretsController.canon.gameObject.activeSelf;
@@ -216,6 +242,9 @@ public class UIUpgradePanel : MonoBehaviour
             case 8: return turretsController.canon.gameObject.activeSelf;
             case 9: return turretsController.canon.gameObject.activeSelf;
             case 10: return turretsController.canon.gameObject.activeSelf;
+
+            case 16: return turretsController.blade_storm.gameObject.activeSelf;
+            case 17: return turretsController.blade_storm.gameObject.activeSelf;
         }
 
         return true;
