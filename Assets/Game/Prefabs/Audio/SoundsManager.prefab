@@ -49,14 +49,10 @@ MonoBehaviour:
   _sounds:
   - type: 0
     audioClips:
-    - {fileID: 8300000, guid: 3aabfac45cdf940438a9a45617821717, type: 3}
-    - {fileID: 8300000, guid: 69f1f1b932de43048a6c7a4ff10aae96, type: 3}
+    - {fileID: 8300000, guid: 89d41af2a63bf444389ab65e3568b5d8, type: 3}
   - type: 1
     audioClips:
     - {fileID: 8300000, guid: 89d41af2a63bf444389ab65e3568b5d8, type: 3}
-    - {fileID: 8300000, guid: 5ea6184bacebc8e45889f52b5a19e3ed, type: 3}
-    - {fileID: 8300000, guid: 1bd81023af82707419375f55c66f0366, type: 3}
-    - {fileID: 8300000, guid: 7c8f5ca5d5408f940b27e8703b9f2147, type: 3}
   - type: 2
     audioClips:
     - {fileID: 8300000, guid: 8092d5ff6c2198145919966cc7057509, type: 3}

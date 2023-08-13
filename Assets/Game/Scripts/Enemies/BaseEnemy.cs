@@ -1,7 +1,5 @@
-using Clicker;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Game.Scripts.GameBoardLogic.Board;
 using UnityEngine;
 
@@ -73,6 +71,10 @@ namespace Enemies
             {
                 GameManager.Instance.OnEnemyDied();
                 Destroy();
+            }
+            else
+            {
+                //SoundsManager.Instance.TryPlaySoundByType(SoundType.EnemyHit);
             }
         }
 
@@ -179,7 +181,7 @@ namespace Enemies
             _buildingsDistancer.onBuild -= TrySetNewClosestBuilding;
             gameObject.SetActive(false);
 
-            //GameManager.Instance.xp += 8;
+            SoundsManager.Instance.TryPlaySoundByType(SoundType.EnemyDeath);
         }
 
         private void SetActiveAnimation(bool isActive)
