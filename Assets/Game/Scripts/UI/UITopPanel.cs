@@ -30,13 +30,13 @@ public class UITopPanel : MonoBehaviour
     private void initXpBar()
     {
         barXp.Initialize(
-            gm.xpToLvl( gm.lvl + 1 ) - gm.xpToLvl( gm.lvl )
-          , new_xp_amount => gm.xpToLvl( new_xp_amount ).ToString()
+            gm.lvlToXp( gm.lvl + 1 ) - gm.lvlToXp( gm.lvl )
+          , new_xp_amount => (gm.lvl + 1).ToString()
         );
     }
 
     private void setValXpBar()
     {
-        barXp.SetValue( gm.xp - gm.xpToLvl( gm.lvl ) );
+        barXp.SetValue( gm.xp - gm.lvlToXp( gm.lvl ) );
     }
 }
