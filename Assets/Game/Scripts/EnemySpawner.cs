@@ -44,7 +44,14 @@ public class EnemySpawner : MonoBehaviour
         int? currentWave = GetCurrentWaveIndexByWaveTime();
 
         if (!currentWave.HasValue)
-            return;
+        {
+            if (WaveConfig.Length == 0)
+                return;
+
+            currentWave = 0;
+            LastSpawnedWave = -1;
+            StartedAtTimestamp = Time.time;
+        }
 
         if (LastSpawnedWave >= currentWave.Value)
             return;
@@ -77,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < waveConfig.EnemiesCount; i++)
         {
             BaseEnemy enemy = Instantiate(EnemyPrefab, GetRandomPointInASpawnRadius(), Quaternion.identity);
-            
+
             enemy.Initialize(waveConfig.EnemyConfig, SpanwerDimension, distancer);
             WaveConfig[waveIndex].SpawnedEnemies.Add(enemy);
         }
