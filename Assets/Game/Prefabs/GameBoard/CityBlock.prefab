@@ -73,8 +73,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 110
-  m_Sprite: {fileID: 1626661191, guid: cfd2189144add4616ba8a967eace7ec1, type: 3}
+  m_SortingOrder: 120
+  m_Sprite: {fileID: 21300000, guid: 186dde0290af24874b06ad059575d7b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,3 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9daf935ed7b6b114c82c564a2aee9bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 2583158238511213181, guid: a29d31d29e4970e4cac6e751a9f5e30e, type: 3}
+  OverworldSprite: {fileID: 21300000, guid: 186dde0290af24874b06ad059575d7b3, type: 3}
+  UnderworldSprite: {fileID: 21300000, guid: 50a2087d8047d46e692886787ea3f17d, type: 3}

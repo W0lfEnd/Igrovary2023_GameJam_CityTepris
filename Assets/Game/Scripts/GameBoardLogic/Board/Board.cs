@@ -108,11 +108,13 @@ namespace Game.Scripts.GameBoardLogic.Board
 
             BoardTile[,] tiles;
             Transform parent;
+            Dimension world;
             bool isBlockedInOverworld = _firstTiles[boardIndex.x, boardIndex.y] != null;
             bool isBlockedInUnderworld = _secondTiles[boardIndex.x, boardIndex.y] != null;
 
             if (isBlockedInOverworld)
             {
+                world = Dimension.BottomDimension;
                 if (isBlockedInUnderworld)
                     return false;
 
@@ -121,6 +123,7 @@ namespace Game.Scripts.GameBoardLogic.Board
             }
             else
             {
+                world = Dimension.TopDimesion;
                 tiles = _firstTiles;
                 parent = OverworldTilesRoot;
             }
@@ -128,6 +131,8 @@ namespace Game.Scripts.GameBoardLogic.Board
             tiles[boardIndex.x, boardIndex.y] = tile;
             tile.transform.SetParent(parent);
             tile.transform.localPosition = new Vector3(boardIndex.x + 1, boardIndex.y + 1, 0);
+
+            tile.OnBuilt(world);
 
             return true;
         }
