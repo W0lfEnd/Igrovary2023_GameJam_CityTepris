@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -76,9 +76,381 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 259
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b106f2d927cb6b644b1b1041176acea6
+      internalID: 1453752872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 259
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77fa108f0d00fb34296e5e4d0a60af54
+      internalID: 1318705673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 259
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c00f99f5e443f9643bfdf434b017cc5c
+      internalID: -24419378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 259
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3260db85bb5837c4d8ad318250e6862a
+      internalID: -2102954040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 259
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bad19c12f4c4a4c47aca8ce8a22f9909
+      internalID: 2085662257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 259
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b23e6eb3d695f6a4d82682e2012a1e3d
+      internalID: -1440076037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_6
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 259
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69d6fb9798a88f144898cf928c3bf69f
+      internalID: 2102625323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_7
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 259
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e3b3050895a2cb4691e516307a94c81
+      internalID: 262000305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fa260965acd7524187db72dc982223c
+      internalID: 1220791673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 6
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 775dbca0ebf635349ab64e0eaa35a9c5
+      internalID: 606210322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_10
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 6
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ee0400989af27847987e6adf7463f7d
+      internalID: 134901750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_11
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 6
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d30da8dc7e684347b0c30f5a1446724
+      internalID: -770820163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_12
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 6
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffd549848cd1cbf4a9dbd3a349b50623
+      internalID: 287907893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_13
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 6
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 332946e4daa49ed4ebc87edaf1b119e0
+      internalID: -666902461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_14
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 6
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c21f723dcaf72046a3a59acc94f4f9d
+      internalID: 589072498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vfx_sequence_x16_impact_earth_1_15
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 6
+        width: 256
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c44578e976e285e46912e0595bad0571
+      internalID: 1429434720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -89,7 +461,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      vfx_sequence_x16_impact_earth_1_9: 606210322
+      vfx_sequence_x16_impact_earth_1_0: 1453752872
+      vfx_sequence_x16_impact_earth_1_4: 2085662257
+      vfx_sequence_x16_impact_earth_1_13: -666902461
+      vfx_sequence_x16_impact_earth_1_6: 2102625323
+      vfx_sequence_x16_impact_earth_1_7: 262000305
+      vfx_sequence_x16_impact_earth_1_5: -1440076037
+      vfx_sequence_x16_impact_earth_1_12: 287907893
+      vfx_sequence_x16_impact_earth_1_14: 589072498
+      vfx_sequence_x16_impact_earth_1_2: -24419378
+      vfx_sequence_x16_impact_earth_1_3: -2102954040
+      vfx_sequence_x16_impact_earth_1_15: 1429434720
+      vfx_sequence_x16_impact_earth_1_1: 1318705673
+      vfx_sequence_x16_impact_earth_1_11: -770820163
+      vfx_sequence_x16_impact_earth_1_10: 134901750
+      vfx_sequence_x16_impact_earth_1_8: 1220791673
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
