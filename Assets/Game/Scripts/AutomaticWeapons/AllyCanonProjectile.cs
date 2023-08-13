@@ -15,8 +15,9 @@ public class AllyCanonProjectile : MonoBehaviour
 {
     private float deltaDistanceToApplyDmg = 0.15f;
 
-    [SerializeField] private GameObject     go_explosion_collider      = null;
-    [SerializeField] private SpriteRenderer projectile_sprite_renderer = null;
+    [SerializeField] private GameObject          go_explosion_collider      = null;
+    [SerializeField] private SpriteRenderer      projectile_sprite_renderer = null;
+    [SerializeField] private AllyCanonCollider2D collider_events_holder     = null;
 
     private BaseEnemy target      = null;
     private Action    onCollision = null;
@@ -26,9 +27,12 @@ public class AllyCanonProjectile : MonoBehaviour
     private float     explosionDuration = 0.3f;
 
     private Tweener tweener_explosion = null;
-    
-    
 
+
+    private void Awake()
+    {
+        collider_events_holder.onTriggerEnter2D += col => col.gameObject.GetComponent<BaseEnemy>()?.Damage( (int)damage );
+    }
 
     public void init( BaseEnemy target, float damage, float speed, float explosionRange, Action onCollision = null )
     {
@@ -54,7 +58,7 @@ public class AllyCanonProjectile : MonoBehaviour
 
         if ( deltaDistanceToApplyDmg < Vector2.Distance( transform.position, target.transform.position ) )
         {
-            transform.up = target.transform.position - transform.position;
+            //transform.up = target.transform.position - transform.position;
             transform.Translate( (target.transform.position - transform.position).normalized * (speed * Time.deltaTime), Space.World );
             return;
         }
@@ -82,16 +86,4 @@ public class AllyCanonProjectile : MonoBehaviour
         go_explosion_collider.transform.localScale = Vector3.one;
         DOTween.Kill( tweener_explosion );
     }
-
-    private void OnTriggerEnter2D( Collider2D col )
-    {
-        col.gameObject.GetComponent<BaseEnemy>()?.Damage( (int)damage );
     }
-    
-    private void OnTriggerStay2D( Collider2D col )
-    {
-        col.gameObject.GetComponent<BaseEnemy>()?.Damage( (int)damage );
-    }
-    
-    
-}

@@ -216,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   go_explosion_collider: {fileID: 7756338267780146577}
   projectile_sprite_renderer: {fileID: 995056454163518165}
+  collider_events_holder: {fileID: 673436162074048502}
 --- !u!1 &7756338267780146577
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +228,7 @@ GameObject:
   - component: {fileID: 5304195242360612828}
   - component: {fileID: 1383476039286884026}
   - component: {fileID: 2746718299638682864}
+  - component: {fileID: 673436162074048502}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -287,3 +289,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &673436162074048502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756338267780146577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e80a676d09c7e4f8bfa7def51cc636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
