@@ -17,7 +17,7 @@ public class TurretsController : MonoBehaviour
   public void init( int lvl = 0 )
   {
     turret.gameObject.SetActive( true );
-    blade_storm.gameObject.SetActive( lvl > 1 );
+    blade_storm.gameObject.SetActive( lvl > 0 );
   }
   
 }

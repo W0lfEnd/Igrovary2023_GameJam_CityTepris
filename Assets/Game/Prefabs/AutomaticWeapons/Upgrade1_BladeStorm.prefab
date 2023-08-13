@@ -79,5 +79,5 @@ MonoBehaviour:
   bladesRoot: {fileID: 6461672458631200630}
   go_blade: {fileID: -2924865371876926004, guid: ba986adca2ad87b44aed983f6ab3acbd, type: 3}
   Damage: 2
-  RotationSpeedInDeg: 10
+  RotationSpeedInDeg: 45
   AttackRadius: 2
