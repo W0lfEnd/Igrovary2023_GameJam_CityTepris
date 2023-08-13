@@ -5644,7 +5644,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 7442011811191696144, guid: 86bb59e76427f5d4d8388802deeaa1ac, type: 3}
-  clicker: {fileID: 1953532243}
   distancer: {fileID: 383444774}
   SpawnRadius: 5.06
   SpanwerDimension: 0
@@ -24858,6 +24857,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 884b4403a929f204f8b1863fe1fb0518, type: 3}
+--- !u!114 &2431136914158135358 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2431136914436709047, guid: 884b4403a929f204f8b1863fe1fb0518, type: 3}
+  m_PrefabInstance: {fileID: 2431136914158135357}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3151466acd1ad4080e8ac9258d7e5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2524614103377468477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25160,6 +25170,34 @@ PrefabInstance:
     - target: {fileID: 755134630161846103, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 940086215025572717, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 940086215025572717, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 940086215025572717, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2431136914158135358}
+    - target: {fileID: 940086215025572717, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 940086215025572717, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CHEAT_upgradeTurretsLvl
+      objectReference: {fileID: 0}
+    - target: {fileID: 940086215025572717, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 940086215025572717, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1333135110164198186, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
       propertyPath: m_AnchorMax.y
