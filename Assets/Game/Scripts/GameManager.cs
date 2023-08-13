@@ -38,6 +38,11 @@ public class GameManager : MonoBehaviour
         onLvlChanged += newLvl => upgradePanel.tryToOpenPanel();
     }
 
+    public bool IsUpgradesPanelActive()
+    {
+       return upgradePanel.isActiveAndEnabled;
+    }
+    
     private void Start()
     {
         init();

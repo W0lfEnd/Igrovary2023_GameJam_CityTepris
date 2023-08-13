@@ -65,6 +65,9 @@ namespace Game.Scripts.GameBoardLogic.Board
 
         private bool HoverShapesOverABoard()
         {
+            if (GameManager.Instance.IsUpgradesPanelActive())
+                return false;
+
             _board.ClearHighlights();
 
             bool canPlaceWholeShape = true;

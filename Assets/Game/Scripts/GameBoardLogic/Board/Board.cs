@@ -40,6 +40,8 @@ namespace Game.Scripts.GameBoardLogic.Board
 
             SpawnCapital(Dimension.TopDimesion);
             SpawnCapital(Dimension.BottomDimension);
+            
+            NotifyBoardChanged();
         }
 
         private void SpawnCapital(Dimension dimension)
