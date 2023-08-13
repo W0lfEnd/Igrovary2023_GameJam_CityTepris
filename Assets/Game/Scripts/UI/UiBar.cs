@@ -51,7 +51,7 @@ namespace Game.Scripts.UI
 
         private void updateValuesText(float val)
         {
-            if ( !_title )
+            if ( !_values )
                 return;
 
             _values.text = get_values_func != null ? get_values_func( (int)val ) : $"{(int)val}/{Slider.maxValue}";

@@ -167,7 +167,7 @@ namespace Enemies
             _buildingsDistancer.onBuild -= TrySetNewClosestBuilding;
             gameObject.SetActive(false);
 
-            GameManager.Instance.xp += (int)(_maxHealth / 3f);
+            GameManager.Instance.xp += 1;
         }
 
         private IEnumerator DelayedAction(float delay, Action callback)
