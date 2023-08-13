@@ -17,6 +17,12 @@ public class AllyBladeStorm : MonoBehaviour
     [SerializeField] private float                RotationSpeedInDeg = 10f;
     [SerializeField] private float                AttackRadius       = 10f;
 
+    public int bladesCount
+    {
+        get => bladesList.Count;
+        set => init( value );
+    }
+
     private List<AllyBladeStorm_Blade> bladesList = new List<AllyBladeStorm_Blade>();
 
     private void OnEnable()
@@ -36,6 +42,9 @@ public class AllyBladeStorm : MonoBehaviour
 
     public void init( int bladesCount = 5 )
     {
+        for ( int i = 0; i < bladesList.Count; i++ )
+            bladesList[i].gameObject.SetActive( true );
+                    
         if ( bladesList.Count < bladesCount )
         {
             int bladesToSpawn = bladesCount - bladesList.Count;
@@ -43,6 +52,13 @@ public class AllyBladeStorm : MonoBehaviour
             {
                 AllyBladeStorm_Blade newBlade = Instantiate( go_blade, Vector3.zero, Quaternion.identity, bladesRoot ).GetComponent<AllyBladeStorm_Blade>();
                 bladesList.Add( newBlade );
+            }
+        } else if ( bladesCount < bladesList.Count )
+        {
+            int bladesToDisable =  bladesList.Count - bladesCount;
+            for ( int i = 0; i < bladesToDisable; i++ )
+            {
+                bladesList[i].gameObject.SetActive( false );
             }
         }
 
@@ -54,12 +70,13 @@ public class AllyBladeStorm : MonoBehaviour
         if ( bladesList.Count == 0 )
             return;
 
-        float radianBladeOffset = 2 * Mathf.PI / bladesList.Count;
-        for ( int i = 0; i < bladesList.Count; i++ )
+        List<AllyBladeStorm_Blade> activeBlades      = bladesList.Where( it => it.isActiveAndEnabled ).ToList();
+        float                      radianBladeOffset = 2 * Mathf.PI / activeBlades.Count;
+        for ( int i = 0; i < activeBlades.Count; i++ )
         {
-            bladesList[i].init( Damage );
-            bladesList[i].transform.localPosition = AttackRadius * new Vector3( Mathf.Sin( i * radianBladeOffset ), Mathf.Cos( i * radianBladeOffset ), 0 );
-            bladesList[i].transform.right = (transform.position - bladesList[i].transform.position).normalized;
+            activeBlades[i].init( Damage );
+            activeBlades[i].transform.localPosition = AttackRadius * new Vector3( Mathf.Sin( i * radianBladeOffset ), Mathf.Cos( i * radianBladeOffset ), 0 );
+            activeBlades[i].transform.right = (transform.position - activeBlades[i].transform.position).normalized;
         }
     }
 

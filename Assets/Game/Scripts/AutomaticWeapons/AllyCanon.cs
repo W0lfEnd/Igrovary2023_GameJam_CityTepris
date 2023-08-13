@@ -10,11 +10,40 @@ using UnityEngine.Pool;
 public class AllyCanon : MonoBehaviour
 {
     [SerializeField] private AllyCanonProjectile go_projectile   = null;
-    [SerializeField] private float                Damage          = 10f;
-    [SerializeField] private float                AttackEveryMs   = 1500f;
-    [SerializeField] private float                ProjectileSpeed = 3f;
-    [SerializeField] private float                AttackRange     = 4f;
-    [SerializeField] private float                ExplosionRange  = 1.5f;
+    [SerializeField] private float                _Damage          = 10f;
+    [SerializeField] private float                _AttackEveryMs   = 1500f;
+    [SerializeField] private float                _ProjectileSpeed = 3f;
+    [SerializeField] private float                _AttackRange     = 4f;
+    [SerializeField] private float                _ExplosionRange  = 4f;
+
+    public float AttacksPerSecond
+    {
+        get => 1f / _AttackEveryMs / 1000f;
+        set
+        {
+            if ( value == 0 )
+                value = 999999999999999;
+            _AttackEveryMs = 1f / value * 1000f;
+        }
+    }
+    
+    public float AttackRange
+    {
+        get => _AttackRange;
+        set
+        {
+            _AttackRange = value;
+        }
+    }
+
+    public float ExplosionRange
+    {
+        get => _ExplosionRange;
+        set
+        {
+            _ExplosionRange = value;
+        }
+    }
 
     private float                           TimeToNextShot  = 0.0f;
     private ObjectPool<AllyCanonProjectile> projectilesPool = null;
@@ -38,7 +67,7 @@ public class AllyCanon : MonoBehaviour
     private void Update()
     {
         TimeToNextShot += Time.deltaTime * 1000;
-        if ( TimeToNextShot > AttackEveryMs )
+        if ( TimeToNextShot > _AttackEveryMs )
         {
             TimeToNextShot = 0;
             List<BaseEnemy> enemiesInRange = Physics2D.OverlapCircleAll( transform.position, AttackRange ).Select( it => it.gameObject.GetComponent<BaseEnemy>() ).Where( it => it != null ).ToList();
@@ -61,9 +90,7 @@ public class AllyCanon : MonoBehaviour
     {
         var bullet = projectilesPool.Get();
         bullet.transform.position = transform.position;
-        bullet.init( target, Damage, ProjectileSpeed, ExplosionRange, () => projectilesPool.Release( bullet ) );
-
-        SoundsManager.Instance.TryPlaySoundByType(SoundType.CannonShot);
+        bullet.init( target, _Damage, _ProjectileSpeed, _ExplosionRange, () => projectilesPool.Release( bullet ) );
     }
 
     private void OnDrawGizmos()

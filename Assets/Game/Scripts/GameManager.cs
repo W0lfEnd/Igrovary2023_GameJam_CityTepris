@@ -28,10 +28,14 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField] private UIUpgradePanel upgradePanel = null;
+
     void Awake()
     {
         InitializeSingleton();
         InitializeDimensionMusicTheme();
+
+        onLvlChanged += newLvl => upgradePanel.tryToOpenPanel();
     }
 
     private void Start()
@@ -48,10 +52,11 @@ public class GameManager : MonoBehaviour
 
    private void init()
    {
-      turretsLvl = 0;
       gold = 0;
       xp = 0;
       health = maxHealth;
+      
+      upgradePanel.gameObject.SetActive( false );
    }
 
    #region Economics
@@ -79,7 +84,6 @@ public class GameManager : MonoBehaviour
          if ( new_lvl > old_lvl )
          {
             onLvlChanged( new_lvl );
-            turretsLvl += new_lvl - old_lvl;
          }
             
          
@@ -143,29 +147,7 @@ public class GameManager : MonoBehaviour
    #endregion
 
    #region Turrets
-   public int turretsLvl
-   {
-      get => _turretLvl;
-      set
-      {
-         _turretLvl = value;
-         setTurretsLvl( _turretLvl );
-      }
-   }
-
-   private int _turretLvl = 0;
-
-   [SerializeField] private List<TurretsController> TurretControllers = null;
-
-   public void setTurretsLvl( int lvl )
-   {
-      foreach ( TurretsController turretController in TurretControllers )
-      {
-         turretController.init( lvl );
-      }
-   }
-
-   public void CHEAT_upgradeTurretsLvl() => turretsLvl++;
+   [SerializeField] public List<TurretsController> TurretControllers = null;
    #endregion
    
    #region WorldSwap

@@ -10,10 +10,30 @@ using UnityEngine.Pool;
 public class AllyTurret : MonoBehaviour
 {
     [SerializeField] private AllyTurretProjectile go_projectile   = null;
-    [SerializeField] private float                Damage          = 10f;
-    [SerializeField] private float                AttackEveryMs   = 300f;
-    [SerializeField] private float                ProjectileSpeed = 10f;
-    [SerializeField] private float                AttackRange     = 10f;
+    [SerializeField] private float                _Damage          = 10f;
+    [SerializeField] private float                _AttackEveryMs   = 300f;
+    [SerializeField] private float                _ProjectileSpeed = 10f;
+    [SerializeField] private float                _AttackRange     = 2.5f;
+
+    public float AttacksPerSecond
+    {
+        get => 1f / _AttackEveryMs / 1000f;
+        set
+        {
+            if ( value == 0 )
+                value = 999999999999999;
+            _AttackEveryMs = 1f / value * 1000f;
+        }
+    }
+    
+    public float AttackRange
+    {
+        get => _AttackRange;
+        set
+        {
+            _AttackRange = value;
+        }
+    }
 
     private float                            TimeToNextShot  = 0.0f;
     private ObjectPool<AllyTurretProjectile> projectilesPool = null;
@@ -37,7 +57,7 @@ public class AllyTurret : MonoBehaviour
     private void Update()
     {
         TimeToNextShot += Time.deltaTime * 1000;
-        if ( TimeToNextShot > AttackEveryMs )
+        if ( TimeToNextShot > _AttackEveryMs )
         {
             TimeToNextShot = 0;
             List<BaseEnemy> enemiesInRange = Physics2D.OverlapCircleAll( transform.position, AttackRange ).Select( it => it.gameObject.GetComponent<BaseEnemy>() ).Where( it => it != null ).ToList();
@@ -60,7 +80,7 @@ public class AllyTurret : MonoBehaviour
     {
         var bullet = projectilesPool.Get();
         bullet.transform.position = transform.position;
-        bullet.init( target, Damage, ProjectileSpeed, () => projectilesPool.Release( bullet ) );
+        bullet.init( target, _Damage, _ProjectileSpeed, () => projectilesPool.Release( bullet ) );
 
         SoundsManager.Instance.TryPlaySoundByType(SoundType.TurretShoot);
         SoundsManager.Instance.TryPlaySoundByType(SoundType.TurretReloading);
