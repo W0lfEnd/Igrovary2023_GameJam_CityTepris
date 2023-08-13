@@ -19,7 +19,7 @@ namespace Game.Scripts.GameBoardLogic.Board
         {
             gameObject.SetActive(true);
 
-            GetComponent<SpriteRenderer>().sprite = DisAllowedSprite;
+            renderer.sprite = DisAllowedSprite;
         }
 
         public void Hide()
