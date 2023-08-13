@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemies;
 using Game.Scripts;
+using Game.Scripts.GameBoardLogic.Board;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -28,16 +29,80 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField] private RectTransform gameoverPrefab        = null;
+    [SerializeField] private RectTransform gameoverParent        = null;
     [SerializeField] private UIUpgradePanel upgradePanel = null;
+    private int enemiesDied;
+    private float startedPlayingAt;
+    private bool hasEndedGame = false;
 
     void Awake()
     {
+       enemiesDied = 0;
+       startedPlayingAt = Time.time;
         InitializeSingleton();
         InitializeDimensionMusicTheme();
 
         onLvlChanged += newLvl => upgradePanel.tryToOpenPanel();
+        Board.OnBoardChanged += ( firstList, secondList ) =>
+        {
+           if ( this == null || !this )
+              return;
+
+           cityBlockCount = firstList.Count + secondList.Count;
+        };
+
     }
 
+    private float          timer_to_give_xp = 0f;
+    public  int            _cityBlockCount  = 0;
+    
+    public  event Action<int> cityBlocksCountChanged  = delegate {  };
+    public int cityBlockCount
+    {
+       get => _cityBlockCount;
+       private set
+       {
+          _cityBlockCount = value;
+          cityBlocksCountChanged( _cityBlockCount );
+       }
+    }
+
+    public int   xpPerCityBlockPerSecond = 1;
+
+    private void Update()
+    {
+       timer_to_give_xp += Time.deltaTime;
+       if ( timer_to_give_xp > 1f )
+       {
+          timer_to_give_xp = 0;
+          xp += cityBlockCount * xpPerCityBlockPerSecond;
+       }
+    }
+
+    private void ShowEndgamePanel()
+    {
+       hasEndedGame = true;
+       var gameover = Instantiate(gameoverPrefab,gameoverParent);
+
+       Time.timeScale = 0;
+       FindObjectOfType<ShapeSpawner>().enabled = false;
+    }
+    public void OnEnemyDied()
+    {
+       enemiesDied++;
+    }
+
+    public int GetEnemiesDied()
+    {
+       return enemiesDied;
+    }
+
+    public float GetPlayTime()
+    {
+       return Time.time - startedPlayingAt;
+    }
+    
     public bool IsUpgradesPanelActive()
     {
        return upgradePanel.isActiveAndEnabled;
@@ -101,6 +166,9 @@ public class GameManager : MonoBehaviour
 
    public int xpToLvl( int amount )
    {
+      if ( amount >= 1200 )
+         return amount / 200;
+
       if ( amount >= 1000 )
          return 4;
 
@@ -127,7 +195,7 @@ public class GameManager : MonoBehaviour
          case 4:  return 700;
          case 5:  return 1000;
 
-         default: return 99999999;
+         default: return lvl * 200;
       }
    }
 
@@ -144,11 +212,16 @@ public class GameManager : MonoBehaviour
             _health = maxHealth;
 
          onHealthChanged( _health );
+
+         if (health <= 0 && !hasEndedGame)
+         {
+            ShowEndgamePanel();
+         }
       }
    }
    private int _health = 0;
 
-   public int maxHealth = 100;
+   public int maxHealth = 1000;
    #endregion
 
    #region Turrets

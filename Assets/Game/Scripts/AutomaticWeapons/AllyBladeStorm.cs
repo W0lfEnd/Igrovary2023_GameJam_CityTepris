@@ -14,8 +14,20 @@ public class AllyBladeStorm : MonoBehaviour
     [SerializeField] private Transform            bladesRoot         = null;
     [SerializeField] private AllyBladeStorm_Blade go_blade           = null;
     [SerializeField] private int                  Damage             = 1;
-    [SerializeField] private float                RotationSpeedInDeg = 10f;
-    [SerializeField] private float                AttackRadius       = 10f;
+    [SerializeField] public float                 RotationSpeedInDeg = 45f;
+    [SerializeField] private float                _AttackRadius      = 2f;
+
+    public float AttackRadius
+    {
+        get => _AttackRadius;
+        set
+        {
+            _AttackRadius = value;
+            initBlades();
+        }
+    }
+    
+    
 
     public int bladesCount
     {
@@ -75,7 +87,7 @@ public class AllyBladeStorm : MonoBehaviour
         for ( int i = 0; i < activeBlades.Count; i++ )
         {
             activeBlades[i].init( Damage );
-            activeBlades[i].transform.localPosition = AttackRadius * new Vector3( Mathf.Sin( i * radianBladeOffset ), Mathf.Cos( i * radianBladeOffset ), 0 );
+            activeBlades[i].transform.localPosition = _AttackRadius * new Vector3( Mathf.Sin( i * radianBladeOffset ), Mathf.Cos( i * radianBladeOffset ), 0 );
             activeBlades[i].transform.right = (transform.position - activeBlades[i].transform.position).normalized;
         }
     }

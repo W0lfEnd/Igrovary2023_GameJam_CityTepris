@@ -14,7 +14,12 @@ namespace Game.Scripts.UI
 
         private void Awake()
         {
-            ShapeSpawner.OnFigureSpawned += (spawner) => Show(spawner.PeekNextShape());
+            ShapeSpawner.OnFigureSpawned += (spawner) =>
+            {
+                if ( this == null || !this )
+                    return;
+                Show( spawner.PeekNextShape() );
+            };
         }
 
         private void Show(BuildShape buildingShape)

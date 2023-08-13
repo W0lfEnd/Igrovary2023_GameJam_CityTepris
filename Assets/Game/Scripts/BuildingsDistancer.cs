@@ -20,7 +20,13 @@ public class BuildingsDistancer : MonoBehaviour
     {
         Validate();
 
-        Board.OnBoardChanged += AddBuilding;
+        Board.OnBoardChanged += ( list1, list2 ) =>
+        {
+            if ( this == null || !this )
+                return;
+
+            AddBuilding( list1, list2 );
+        };
 
         _topBuildings.Add(_topMainBuilding);
         _bottomBuildings.Add(_bottomMainBuilding);

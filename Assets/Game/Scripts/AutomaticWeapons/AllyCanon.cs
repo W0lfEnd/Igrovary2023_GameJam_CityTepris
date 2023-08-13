@@ -9,6 +9,7 @@ using UnityEngine.Pool;
 
 public class AllyCanon : MonoBehaviour
 {
+
     [SerializeField] private AllyCanonProjectile go_projectile        = null;
     [SerializeField] private LineRenderer        line_renderer_radius = null;
     [SerializeField] private float               _Damage              = 10f;

@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Scripts.UI;
+using TMPro;
 using UnityEngine;
 
 public class UITopPanel : MonoBehaviour
 {
     [SerializeField] private UiBar barHealth = null;
     [SerializeField] private UiBar barXp     = null;
+    [SerializeField] private TextMeshProUGUI txtXpInfo     = null;
 
 
     private static GameManager gm => GameManager.Instance;
@@ -16,6 +18,7 @@ public class UITopPanel : MonoBehaviour
     {
         gm.onLvlChanged += new_lvl => initXpBar();
         gm.onXpChanged += new_lvl => setValXpBar();
+        gm.cityBlocksCountChanged += blocksCount => txtXpInfo.text = $"За один кожен домік ти отримуєш {gm.xpPerCityBlockPerSecond}xp/сек, всього: {blocksCount * gm.xpPerCityBlockPerSecond}xp/сек";
 
         barHealth.Initialize( gm.maxHealth );
         gm.onHealthChanged += health => barHealth.SetValue( health );
