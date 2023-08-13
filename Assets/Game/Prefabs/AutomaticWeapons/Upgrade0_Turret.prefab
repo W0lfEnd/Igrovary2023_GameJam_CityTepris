@@ -50,7 +50,7 @@ MonoBehaviour:
   _Damage: 10
   _AttackEveryMs: 250
   _ProjectileSpeed: 10
-  _AttackRange: 2.5
+  _AttackRange: 2
 --- !u!120 &9132907983534319868
 LineRenderer:
   m_ObjectHideFlags: 0
