@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
          if ( new_lvl > old_lvl )
          {
             onLvlChanged( new_lvl );
-            turretsLvl = new_lvl;
+            turretsLvl += new_lvl - old_lvl;
          }
             
          

@@ -13,7 +13,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class AllyCanonProjectile : MonoBehaviour
 {
-    private float deltaDistanceToApplyDmg = 0.5f;
+    private float deltaDistanceToApplyDmg = 0.15f;
 
     [SerializeField] private GameObject     go_explosion_collider      = null;
     [SerializeField] private SpriteRenderer projectile_sprite_renderer = null;
@@ -52,27 +52,29 @@ public class AllyCanonProjectile : MonoBehaviour
             return;
         }
 
-        transform.up = target.transform.position - transform.position;
-        transform.Translate( (target.transform.position - transform.position).normalized * (speed * Time.deltaTime), Space.World );
-
-        if ( deltaDistanceToApplyDmg > Vector2.Distance( transform.position, target.transform.position ) )
+        if ( deltaDistanceToApplyDmg < Vector2.Distance( transform.position, target.transform.position ) )
         {
-            projectile_sprite_renderer.enabled = false;
-
-            go_explosion_collider.SetActive( true );
-            go_explosion_collider.transform.localScale = Vector3.zero;
-            tweener_explosion = go_explosion_collider
-                                .transform
-                                .DOScale( explosionScale * Vector3.one, explosionDuration )
-                                .Play();
-
-            tweener_explosion.onComplete += () =>
-            {
-                go_explosion_collider.SetActive( false );
-                enabled = false;
-                onCollision?.Invoke();
-            };
+            transform.up = target.transform.position - transform.position;
+            transform.Translate( (target.transform.position - transform.position).normalized * (speed * Time.deltaTime), Space.World );
+            return;
         }
+
+        projectile_sprite_renderer.enabled = false;
+
+        go_explosion_collider.SetActive( true );
+        go_explosion_collider.transform.localScale = Vector3.zero;
+        tweener_explosion = go_explosion_collider
+                            .transform
+                            .DOScale( explosionScale * Vector3.one, explosionDuration )
+                            .Play();
+
+        tweener_explosion.onComplete += () =>
+        {
+            go_explosion_collider.SetActive( false );
+            onCollision?.Invoke();
+        };
+
+        enabled = false;
     }
 
     private void OnDisable()
@@ -81,8 +83,15 @@ public class AllyCanonProjectile : MonoBehaviour
         DOTween.Kill( tweener_explosion );
     }
 
-    private void OnCollisionEnter2D( Collision2D col )
+    private void OnTriggerEnter2D( Collision2D col )
     {
         col.gameObject.GetComponent<BaseEnemy>()?.Damage( (int)damage );
     }
+    
+    private void OnTriggerStay2D( Collision2D col )
+    {
+        col.gameObject.GetComponent<BaseEnemy>()?.Damage( (int)damage );
+    }
+    
+    
 }

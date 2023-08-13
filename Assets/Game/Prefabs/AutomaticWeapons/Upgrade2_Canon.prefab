@@ -49,4 +49,4 @@ MonoBehaviour:
   AttackEveryMs: 1500
   ProjectileSpeed: 3
   AttackRange: 4
-  ExplosionRange: 1.5
+  ExplosionRange: 4
