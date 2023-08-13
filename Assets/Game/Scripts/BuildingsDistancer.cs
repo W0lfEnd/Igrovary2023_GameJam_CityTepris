@@ -53,9 +53,9 @@ public class BuildingsDistancer : MonoBehaviour
             return null;
 
         GameObject closestBuilding = buildings[0];
-        float closestBuildingDistance = Vector2.Distance(enemy.gameObject.transform.position, buildings[0].transform.position);
+        float closestBuildingDistance = Vector2.Distance(enemy.gameObject.transform.position, closestBuilding.transform.position);
 
-        for (int i = 0; i < buildings.Count; i++)
+        for (int i = 1; i < buildings.Count; i++)
         {
             float nextBuildingDistance = Vector2.Distance(enemy.gameObject.transform.position, buildings[i].transform.position);
 
