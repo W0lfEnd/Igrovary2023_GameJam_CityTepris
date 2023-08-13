@@ -184,18 +184,14 @@ namespace Enemies
 
         private void SetActiveAnimation(bool isActive)
         {
-            _animatorComponent.Play( _animationClip.name );
-            // _animationComponent.clip = _animationClip;
-            //
-            // if (isActive)
-            // {
-            //     _animationComponent.clip = _animationClip;
-            //     _animationComponent.Play();
-            // }
-            // else
-            // {
-            //     _animationComponent.Stop();
-            // }
+            if (isActive)
+            {
+                _animatorComponent.Play(_animationClip.name);
+            }
+            else
+            {
+                _animatorComponent.StopPlayback();
+            }
         }
 
         private IEnumerator DelayedAction(float delay, Action callback)
