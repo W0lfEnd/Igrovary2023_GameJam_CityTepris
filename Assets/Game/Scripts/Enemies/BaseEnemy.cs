@@ -10,7 +10,7 @@ namespace Enemies
     public class BaseEnemy : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private Animation _animationComponent;
+        [SerializeField] private Animator _animatorComponent;
 
         [Header("Don't touch this, this is SOLID")]
         public BoxCollider2D boxCollider;
@@ -184,17 +184,18 @@ namespace Enemies
 
         private void SetActiveAnimation(bool isActive)
         {
-            _animationComponent.clip = _animationClip;
-
-            if (isActive)
-            {
-                _animationComponent.clip = _animationClip;
-                _animationComponent.Play();
-            }
-            else
-            {
-                _animationComponent.Stop();
-            }
+            _animatorComponent.Play( _animationClip.name );
+            // _animationComponent.clip = _animationClip;
+            //
+            // if (isActive)
+            // {
+            //     _animationComponent.clip = _animationClip;
+            //     _animationComponent.Play();
+            // }
+            // else
+            // {
+            //     _animationComponent.Stop();
+            // }
         }
 
         private IEnumerator DelayedAction(float delay, Action callback)

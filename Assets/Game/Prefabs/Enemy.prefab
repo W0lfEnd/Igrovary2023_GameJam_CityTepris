@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 7442011811191696145}
-  _animationComponent: {fileID: 695212772181534526}
+  _animatorComponent: {fileID: 3877854323087481692}
   boxCollider: {fileID: 7442011811191696146}
   isDragged: 0
 --- !u!114 &259103481525072821
@@ -146,7 +146,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!95 &3877854323087481692
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -163,7 +163,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!111 &695212772181534526
 Animation:
   m_ObjectHideFlags: 0
