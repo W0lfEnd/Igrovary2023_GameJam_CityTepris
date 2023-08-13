@@ -18,13 +18,14 @@ public class UITopPanel : MonoBehaviour
         gm.onXpChanged += new_lvl => setValXpBar();
 
         barHealth.Initialize( gm.maxHealth );
-        gm.onHealthChanged += health => barHealth.SetValue( health );;
+        gm.onHealthChanged += health => barHealth.SetValue( health );
     }
 
     // Start is called before the first frame update
     void Start()
     {
         initXpBar();
+        setValXpBar();
     }
 
     private void initXpBar()

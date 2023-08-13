@@ -29,6 +29,9 @@ namespace Game.Scripts.UI
             _slider.maxValue = maxValue;
             this.get_title_func = get_title_func;
             this.get_values_func = get_values_func;
+
+            updateValuesText(_slider.value);
+            updateTitleText(_slider.value);
         }
 
         public void IncreaseValue(int value)
