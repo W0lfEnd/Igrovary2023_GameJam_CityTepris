@@ -9,6 +9,7 @@ using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
+using Quaternion = UnityEngine.Quaternion;
 
 
 public class AllyCanonProjectile : MonoBehaviour
@@ -18,6 +19,7 @@ public class AllyCanonProjectile : MonoBehaviour
     [SerializeField] private GameObject          go_explosion_collider      = null;
     [SerializeField] private SpriteRenderer      projectile_sprite_renderer = null;
     [SerializeField] private AllyCanonCollider2D collider_events_holder     = null;
+    [SerializeField] private GameObject          explosionParticle = null;
 
     private BaseEnemy target      = null;
     private Action    onCollision = null;
@@ -76,6 +78,7 @@ public class AllyCanonProjectile : MonoBehaviour
 
         tweener_explosion.onComplete += () =>
         {
+            Instantiate(explosionParticle, go_explosion_collider.transform.position, Quaternion.identity);
             go_explosion_collider.SetActive( false );
             onCollision?.Invoke();
         };

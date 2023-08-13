@@ -174,7 +174,9 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 0}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: 3368d8c5d42e6e443a6f1c311bc7c259, type: 2}
+  - {fileID: 7400000, guid: 1bbc19c044899004f9075e337de0ab0b, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0

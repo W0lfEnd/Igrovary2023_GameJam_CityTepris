@@ -8,7 +8,7 @@ AnimationClip:
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyImpAnimation
   serializedVersion: 6
-  m_Legacy: 0
+  m_Legacy: 1
   m_Compressed: 0
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
@@ -39,20 +39,8 @@ AnimationClip:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings:
-    - serializedVersion: 2
-      path: 0
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-    pptrCurveMapping:
-    - {fileID: 21300000, guid: ea66c8af8979b2a41b777ed0ec0b1f0a, type: 3}
-    - {fileID: 21300000, guid: b348ad3d2b5d3dd45ae05445a14e0f40, type: 3}
-    - {fileID: 21300000, guid: ea66c8af8979b2a41b777ed0ec0b1f0a, type: 3}
-    - {fileID: 21300000, guid: b348ad3d2b5d3dd45ae05445a14e0f40, type: 3}
-    - {fileID: 21300000, guid: 255c32e777422e446910514b73aa3ab8, type: 3}
+    genericBindings: []
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
