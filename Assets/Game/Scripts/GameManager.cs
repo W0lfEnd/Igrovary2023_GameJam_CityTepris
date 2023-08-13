@@ -68,7 +68,11 @@ public class GameManager : MonoBehaviour
          int new_lvl = xpToLvl( _xp );
          int old_lvl = xpToLvl( old_val );
          if ( new_lvl > old_lvl )
+         {
             onLvlChanged( new_lvl );
+            turretsLvl = new_lvl;
+         }
+            
          
          onXpChanged( _xp );
       }
@@ -144,38 +148,6 @@ public class GameManager : MonoBehaviour
       {
          turretController.init( lvl );
       }
-   }
-
-   public int goldCostForTurretsUpgrade()
-   {
-      return needGoldForUpgradeToLvl( turretsLvl + 1 );
-   }
-
-   public int needGoldForUpgradeToLvl( int lvl )
-   {
-      switch ( lvl )
-      {
-         case 0: return 0;
-         case 1: return 100;
-         case 2: return 200;
-         case 3: return 300;
-         case 4: return 400;
-         
-         default: return 999999999;
-      }
-   }
-
-   public bool tryUpgradeTurrets()
-   {
-      int upgradeCost = goldCostForTurretsUpgrade();
-      if ( gold >= upgradeCost )
-      {
-         gold -= upgradeCost;
-         turretsLvl++;
-         return true;
-      }
-
-      return false;
    }
 
    public void CHEAT_upgradeTurretsLvl() => turretsLvl++;
