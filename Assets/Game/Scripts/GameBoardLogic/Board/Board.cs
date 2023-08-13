@@ -10,6 +10,9 @@ namespace Game.Scripts.GameBoardLogic.Board
         [SerializeField] private Vector2Int BoardDimensions;
         [SerializeField] private int TileSize;
 
+        [SerializeField] private Transform OverworldTilesRoot;
+        [SerializeField] private Transform UnderworldTilesRoot;
+
         private BoardTile[,] _firstTiles;
         private BoardTile[,] _secondTiles;
         private HighlightTile[,] _highlightTiles;
@@ -37,12 +40,12 @@ namespace Game.Scripts.GameBoardLogic.Board
 
             IterateABoard(_firstTiles, ((index, tile) =>
             {
-                Vector3 position = GetTileWorldPositionByIndex(index);
+                Vector3 position = GetTileWorldPositionByIndex(Dimension.TopDimesion, index);
                 HighlightTile highlighter = Instantiate(highlightTilePrefab, position, Quaternion.identity, transform);
 
                 _highlightTiles[index.x, index.y] = highlighter;
 
-                highlighter.HighlightAsAllowed();
+                highlighter.Hide();
 
                 return true;
             }));
@@ -56,18 +59,21 @@ namespace Game.Scripts.GameBoardLogic.Board
             }
         }
 
-        public void HighlightAsAllowed(Dimension dimension, Vector2Int index)
+        public void HighlightAsAllowed(Vector2Int index)
         {
             _highlightTiles[index.x, index.y].HighlightAsAllowed();
         }
 
-        public void HighlightAsDisAllowed(Dimension dimension, Vector2Int index)
+        public void HighlightAsDisAllowed(Vector2Int index)
         {
             _highlightTiles[index.x, index.y].HighlightAsDisAllowed();
         }
 
         public bool CanPlaceInTile(Dimension dimension, Vector3 worldPosition)
         {
+            if (dimension == Dimension.BottomDimension)
+                return false;
+
             Vector2Int? OptionalIndex = GetBoardIndexByWorldPosition(worldPosition);
 
             if (!OptionalIndex.HasValue)
@@ -78,30 +84,46 @@ namespace Game.Scripts.GameBoardLogic.Board
             bool isBlockedInOverworld = _firstTiles[Index.x, Index.y] != null;
             bool isBlockedInUnderworld = _secondTiles[Index.x, Index.y] != null;
 
-            if (dimension == Dimension.TopDimesion)
+            if (isBlockedInOverworld)
                 return !isBlockedInUnderworld;
             else
-                return !isBlockedInOverworld;
+                return true;
         }
 
         public bool SetNewTileIn(Dimension dimension, BoardTile tile, Vector2Int boardIndex)
         {
-            BoardTile[,] tiles;
-
-            if (dimension == Dimension.TopDimesion)
-                tiles = _firstTiles;
-            else
-                tiles = _secondTiles;
+            if (dimension != Dimension.TopDimesion)
+                return false;
 
             bool isIndexInsideABoard = boardIndex.x >= 0
                                        && boardIndex.y >= 0
                                        && boardIndex.x <= BoardDimensions.x
                                        && boardIndex.y <= BoardDimensions.y;
+
             if (!isIndexInsideABoard)
                 return false;
 
+            BoardTile[,] tiles;
+            Transform parent;
+            bool isBlockedInOverworld = _firstTiles[boardIndex.x, boardIndex.y] != null;
+            bool isBlockedInUnderworld = _secondTiles[boardIndex.x, boardIndex.y] != null;
+
+            if (isBlockedInOverworld)
+            {
+                if (isBlockedInUnderworld)
+                    return false;
+
+                tiles = _secondTiles;
+                parent = UnderworldTilesRoot;
+            }
+            else
+            {
+                tiles = _firstTiles;
+                parent = OverworldTilesRoot;
+            }
+
             tiles[boardIndex.x, boardIndex.y] = tile;
-            tile.transform.SetParent(transform);
+            tile.transform.SetParent(parent);
             tile.transform.localPosition = new Vector3(boardIndex.x + 1, boardIndex.y + 1, 0);
 
             return true;
@@ -113,7 +135,7 @@ namespace Game.Scripts.GameBoardLogic.Board
 
             IterateABoard(_firstTiles, (index, tile) =>
             {
-                Vector2 position = (Vector2)GetTileWorldPositionByIndex(index);
+                Vector2 position = (Vector2)GetTileWorldPositionByIndex(Dimension.TopDimesion, index);
 
                 if ((position - (Vector2)WorldPosition).magnitude <= TileSize / 2.0f)
                 {
@@ -127,12 +149,18 @@ namespace Game.Scripts.GameBoardLogic.Board
             return result;
         }
 
-        public Vector3 GetTileWorldPositionByIndex(Vector2Int indexOnBoard)
+        public Vector3 GetTileWorldPositionByIndex(Dimension dimension, Vector2Int indexOnBoard)
         {
             indexOnBoard.x += 1;
             indexOnBoard.y += 1;
 
-            Vector3 center = transform.position;
+            Vector3 center;
+
+            if (dimension == Dimension.TopDimesion)
+                center = OverworldTilesRoot.position;
+            else
+                center = UnderworldTilesRoot.position;
+
             center += new Vector3(indexOnBoard.x * (TileSize), indexOnBoard.y * (TileSize), 0);
 
             return center;
@@ -159,8 +187,10 @@ namespace Game.Scripts.GameBoardLogic.Board
 
             IterateABoard(_firstTiles, (Vector2Int index, BoardTile tile) =>
             {
-                Vector3 center = GetTileWorldPositionByIndex(index);
+                Vector3 center = GetTileWorldPositionByIndex(Dimension.TopDimesion, index);
+                Gizmos.DrawWireCube(center, new Vector3(TileSize, TileSize, TileSize));
 
+                center = GetTileWorldPositionByIndex(Dimension.BottomDimension, index);
                 Gizmos.DrawWireCube(center, new Vector3(TileSize, TileSize, TileSize));
 
                 return true;

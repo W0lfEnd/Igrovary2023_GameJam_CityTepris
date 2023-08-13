@@ -78,20 +78,21 @@ namespace Game.Scripts.GameBoardLogic.Board
             foreach (GameObject shapeInstance in SpawnedInstances)
             {
                 Vector3 position = shapeInstance.transform.localPosition + transform.position;
-                bool canPlaceTile = _board.CanPlaceInTile(Dimension.TopDimesion, position);
-                Vector2Int? optionalIndex = _board.GetBoardIndexByWorldPosition(position);
+                bool canPlaceTile = _board.CanPlaceInTile(GameManager.Instance.Dimension, position);
+                Vector2Int? optionalIndex =
+                    _board.GetBoardIndexByWorldPosition(position);
 
                 if (!canPlaceTile)
                 {
                     canPlaceWholeShape = false;
 
                     if (optionalIndex.HasValue)
-                        _board.HighlightAsDisAllowed(Dimension.TopDimesion, optionalIndex.Value);
+                        _board.HighlightAsDisAllowed(optionalIndex.Value);
                 }
                 else
                 {
                     if (optionalIndex.HasValue)
-                        _board.HighlightAsAllowed(Dimension.TopDimesion, optionalIndex.Value);
+                        _board.HighlightAsAllowed(optionalIndex.Value);
                 }
             }
 
@@ -107,11 +108,13 @@ namespace Game.Scripts.GameBoardLogic.Board
             {
                 GameObject instance = SpawnedInstances[i];
                 Vector3 position = instance.transform.localPosition + transform.position;
-                Vector2Int? optionalIndex = _board.GetBoardIndexByWorldPosition(position);
+                Vector2Int? optionalIndex =
+                    _board.GetBoardIndexByWorldPosition(position);
 
                 if (optionalIndex.HasValue)
                 {
-                    _board.SetNewTileIn(Dimension.TopDimesion, instance.GetComponent<BoardTile>(), optionalIndex.Value);
+                    _board.SetNewTileIn(GameManager.Instance.Dimension, instance.GetComponent<BoardTile>(),
+                        optionalIndex.Value);
                     SpawnedInstances.RemoveAt(i);
                 }
             }

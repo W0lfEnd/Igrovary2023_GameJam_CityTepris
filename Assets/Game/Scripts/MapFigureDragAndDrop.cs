@@ -46,11 +46,11 @@ public class MapFigureDragAndDrop : MonoBehaviour
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         tilemap.transform.position = new Vector3(worldPos.x, worldPos.y, tilemap.transform.position.z);
 
-        Vector2Int? optionalIndex = _board.GetBoardIndexByWorldPosition(worldPos);
+        //Vector2Int? optionalIndex = _board.GetBoardIndexByWorldPosition(worldPos);
 
-        if (optionalIndex.HasValue)
-        {
-        }
+        // if (optionalIndex.HasValue)
+        // {
+        // }
 
         if (Input.GetMouseButton(0))
         {
