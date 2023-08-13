@@ -136,7 +136,7 @@ public class UIUpgradePanel : MonoBehaviour
             {
                 id = 11,
                 sprite = sprites[5],
-                title = "Збільшити радіус 'Дефолтної зброї'",
+                title = "Збільшити радіус 'Арбалету'",
                 description = () => "+20%",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
             },
@@ -155,6 +155,22 @@ public class UIUpgradePanel : MonoBehaviour
                 title = "Збільшити радіус 'Арбалету'",
                 description = () => "+20%",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
+            },
+            [14] = new ()
+            {
+                id = 14,
+                sprite = sprites[6],
+                title = "Пришвидшити 'Арбалету'",
+                description = () => "+1 в секунду",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttacksPerSecond++  )
+            },
+            [14] = new ()
+            {
+                id = 14,
+                sprite = sprites[6],
+                title = "Пришвидшити 'Арбалету'",
+                description = () => "+1 в секунду",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttacksPerSecond++  )
             },
         };
 
