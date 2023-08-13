@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7854631478213180384}
   - component: {fileID: 4892633591923129607}
+  - component: {fileID: 9132907983534319868}
   m_Layer: 0
   m_Name: Upgrade0_Turret
   m_TagString: Untagged
@@ -45,7 +46,156 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_projectile: {fileID: 3753868616380098134, guid: ed808f3216e327843a23bfe177a0f3d2, type: 3}
-  Damage: 10
-  AttackEveryMs: 300
-  ProjectileSpeed: 10
-  AttackRange: 2.52
+  line_renderer_radius: {fileID: 9132907983534319868}
+  _Damage: 10
+  _AttackEveryMs: 250
+  _ProjectileSpeed: 10
+  _AttackRange: 2.5
+--- !u!120 &9132907983534319868
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614938426557592834}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: cab5e26965e2f564e86e79fe87a4c0bb, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0.8550503, y: 2.3492315, z: 0}
+  - {x: 1.1427449, y: 2.223541, z: 0}
+  - {x: 1.4124177, y: 2.0627837, z: 0}
+  - {x: 1.6598155, y: 1.8694952, z: 0}
+  - {x: 1.8810374, y: 1.6467235, z: 0}
+  - {x: 2.072594, y: 1.3979821, z: 0}
+  - {x: 2.2314646, y: 1.1271936, z: 0}
+  - {x: 2.3551438, y: 0.83862877, z: 0}
+  - {x: 2.4416807, y: 0.53683835, z: 0}
+  - {x: 2.489711, y: 0.22658166, z: 0}
+  - {x: 2.498477, y: -0.087248355, z: 0}
+  - {x: 2.4678407, y: -0.39970243, z: 0}
+  - {x: 2.3982852, y: -0.705853, z: 0}
+  - {x: 2.2909071, y: -1.0008718, z: 0}
+  - {x: 2.1474001, y: -1.2801064, z: 0}
+  - {x: 1.9700277, y: -1.5391527, z: 0}
+  - {x: 1.7615864, y: -1.773926, z: 0}
+  - {x: 1.5253637, y: -1.9807234, z: 0}
+  - {x: 1.2650852, y: -2.1562836, z: 0}
+  - {x: 0.98485595, y: -2.297838, z: 0}
+  - {x: 0.68909454, y: -2.403154, z: 0}
+  - {x: 0.38246626, y: -2.4705706, z: 0}
+  - {x: 0.06980562, y: -2.4990253, z: 0}
+  - {x: -0.24395525, y: -2.4880686, z: 0}
+  - {x: -0.5538694, y: -2.4378738, z: 0}
+  - {x: -0.8550482, y: -2.3492322, z: 0}
+  - {x: -1.1427429, y: -2.223542, z: 0}
+  - {x: -1.4124157, y: -2.062785, z: 0}
+  - {x: -1.6598136, y: -1.8694968, z: 0}
+  - {x: -1.8810357, y: -1.6467255, z: 0}
+  - {x: -2.0725927, y: -1.3979841, z: 0}
+  - {x: -2.231463, y: -1.1271968, z: 0}
+  - {x: -2.3551426, y: -0.838632, z: 0}
+  - {x: -2.4416802, y: -0.5368402, z: 0}
+  - {x: -2.4897108, y: -0.22658321, z: 0}
+  - {x: -2.498477, y: 0.08724709, z: 0}
+  - {x: -2.4678407, y: 0.39970264, z: 0}
+  - {x: -2.398285, y: 0.70585346, z: 0}
+  - {x: -2.290907, y: 1.0008725, z: 0}
+  - {x: -2.147399, y: 1.2801082, z: 0}
+  - {x: -1.970026, y: 1.5391548, z: 0}
+  - {x: -1.7615844, y: 1.7739279, z: 0}
+  - {x: -1.5253606, y: 1.9807258, z: 0}
+  - {x: -1.2650819, y: 2.1562858, z: 0}
+  - {x: -0.98485196, y: 2.2978396, z: 0}
+  - {x: -0.6890892, y: 2.4031553, z: 0}
+  - {x: -0.38246012, y: 2.4705718, z: 0}
+  - {x: -0.06979945, y: 2.4990253, z: 0}
+  - {x: 0.24396318, y: 2.4880679, z: 0}
+  - {x: 0.55387723, y: 2.437872, z: 0}
+  - {x: 0.85505617, y: 2.3492293, z: 0}
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.0058147945
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 0.2722525, g: 1, b: 0.16509432, a: 1}
+      key1: {r: 0.2490823, g: 1, b: 0.08962262, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_UseWorldSpace: 0
+  m_Loop: 0
