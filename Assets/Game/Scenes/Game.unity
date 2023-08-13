@@ -12270,6 +12270,18 @@ PrefabInstance:
       propertyPath: _soundsParent
       value: 
       objectReference: {fileID: 627963201}
+    - target: {fileID: 3483803565554140603, guid: bc133085d3fdc004ab051add9a25c432, type: 3}
+      propertyPath: _sounds.Array.data[3].audioClips.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3483803565554140603, guid: bc133085d3fdc004ab051add9a25c432, type: 3}
+      propertyPath: _sounds.Array.data[4].audioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3483803565554140603, guid: bc133085d3fdc004ab051add9a25c432, type: 3}
+      propertyPath: _sounds.Array.data[4].audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d805197d9ff225e46ae0b49ce04de834, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc133085d3fdc004ab051add9a25c432, type: 3}
 --- !u!1 &1044402642
@@ -16464,7 +16476,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 45009debc95dc3d4aa392ecf6e8f6f51, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b2d949555de1e164dbc530946446b118, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -16728,6 +16740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

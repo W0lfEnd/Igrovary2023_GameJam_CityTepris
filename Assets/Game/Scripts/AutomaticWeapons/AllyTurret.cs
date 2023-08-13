@@ -61,6 +61,9 @@ public class AllyTurret : MonoBehaviour
         var bullet = projectilesPool.Get();
         bullet.transform.position = transform.position;
         bullet.init( target, Damage, ProjectileSpeed, () => projectilesPool.Release( bullet ) );
+
+        SoundsManager.Instance.TryPlaySoundByType(SoundType.TurretShoot);
+        SoundsManager.Instance.TryPlaySoundByType(SoundType.TurretReloading);
     }
 
     private void OnDrawGizmos()
