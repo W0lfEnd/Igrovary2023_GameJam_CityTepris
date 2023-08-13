@@ -16728,7 +16728,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -25152,7 +25151,7 @@ PrefabInstance:
       objectReference: {fileID: 865634282}
     - target: {fileID: 2431136914436709047, guid: 884b4403a929f204f8b1863fe1fb0518, type: 3}
       propertyPath: TurretControllers.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2431136914436709047, guid: 884b4403a929f204f8b1863fe1fb0518, type: 3}
       propertyPath: TurretControllers.Array.data[0]
@@ -25445,6 +25444,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2412015105482871638, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412015105482871638, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4429046292853034338, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -25627,6 +25634,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8326546625103480093, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9149412798939992212, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9149412798939992212, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
