@@ -212,6 +212,10 @@ public class UIUpgradePanel : MonoBehaviour
             case 5: return turretsController.canon.gameObject.activeSelf;
             case 6: return turretsController.canon.gameObject.activeSelf;
             case 7: return turretsController.canon.gameObject.activeSelf;
+
+            case 8: return turretsController.canon.gameObject.activeSelf;
+            case 9: return turretsController.canon.gameObject.activeSelf;
+            case 10: return turretsController.canon.gameObject.activeSelf;
         }
 
         return true;
