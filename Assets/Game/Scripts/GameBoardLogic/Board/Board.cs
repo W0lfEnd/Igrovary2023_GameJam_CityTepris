@@ -7,6 +7,7 @@ namespace Game.Scripts.GameBoardLogic.Board
 {
     public class Board : MonoBehaviour
     {
+        [SerializeField] private BoardTile MainCityBlock;
         [SerializeField] private HighlightTile highlightTilePrefab;
         [SerializeField] private Vector2Int BoardDimensions;
         [SerializeField] private int TileSize;
@@ -24,6 +25,48 @@ namespace Game.Scripts.GameBoardLogic.Board
         private void Start()
         {
             InitializeBoard();
+
+            IterateABoard(_firstTiles, ((index, tile) =>
+            {
+                Vector3 position = GetTileWorldPositionByIndex(Dimension.TopDimesion, index);
+                HighlightTile highlighter = Instantiate(highlightTilePrefab, position, Quaternion.identity, transform);
+
+                _highlightTiles[index.x, index.y] = highlighter;
+
+                highlighter.Hide();
+
+                return true;
+            }));
+
+            SpawnCapital(Dimension.TopDimesion);
+            SpawnCapital(Dimension.BottomDimension);
+        }
+
+        private void SpawnCapital(Dimension dimension)
+        {
+            Vector2Int centralPoint = (BoardDimensions - Vector2Int.one) / 2;
+
+            Vector3 spawnPoint = GetTileWorldPositionByIndex(dimension, centralPoint);
+            BoardTile capital = Instantiate<BoardTile>(MainCityBlock, spawnPoint, Quaternion.identity, transform);
+            BoardTile[,] tiles;
+            Transform root;
+
+            if (dimension == Dimension.TopDimesion)
+            {
+                tiles = _firstTiles;
+                root = OverworldTilesRoot;
+            }
+            else
+            {
+                tiles = _secondTiles;
+                root = UnderworldTilesRoot;
+            }
+
+            tiles[centralPoint.x, centralPoint.y] = capital;
+            capital.transform.SetParent(root);
+            capital.transform.localPosition = new Vector3(centralPoint.x + 1, centralPoint.y + 1, 0);
+
+            capital.OnBuilt(dimension);
         }
 
         private void OnDestroy()
@@ -40,18 +83,6 @@ namespace Game.Scripts.GameBoardLogic.Board
             _firstTiles = new BoardTile[BoardDimensions.x, BoardDimensions.y];
             _secondTiles = new BoardTile[BoardDimensions.x, BoardDimensions.y];
             _highlightTiles = new HighlightTile[BoardDimensions.x, BoardDimensions.y];
-
-            IterateABoard(_firstTiles, ((index, tile) =>
-            {
-                Vector3 position = GetTileWorldPositionByIndex(Dimension.TopDimesion, index);
-                HighlightTile highlighter = Instantiate(highlightTilePrefab, position, Quaternion.identity, transform);
-
-                _highlightTiles[index.x, index.y] = highlighter;
-
-                highlighter.Hide();
-
-                return true;
-            }));
         }
 
         public void ClearHighlights()

@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377e5b912bf64f549c912acbad7b3acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainCityBlock: {fileID: 5998373522055707126, guid: 3cc7eaecb4c754031a947b9670987c0a, type: 3}
   highlightTilePrefab: {fileID: 1298260004395893566, guid: c401c4b3e8e964cea8ba2894abb02513, type: 3}
   BoardDimensions: {x: 11, y: 11}
   TileSize: 1
