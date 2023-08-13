@@ -19,7 +19,7 @@ namespace Game.Scripts.World
             DOTween.Kill(_targetCamera.transform);
 
             MoveYAnimation(_targetCamera.gameObject, _duration, 0, _to.position.y, () => { OnCompleteSwap?.Invoke(); });
-            RotateAnimation(_targetCamera.gameObject, _duration, new Vector3(0, 0, -180), (() => { }));
+            //RotateAnimation(_targetCamera.gameObject, _duration, new Vector3(0, 0, -180), (() => { }));
         }
 
         public void SwapToUp()
@@ -29,7 +29,7 @@ namespace Game.Scripts.World
 
             MoveYAnimation(_targetCamera.gameObject, _duration, 0, 0, (() => { OnCompleteSwap?.Invoke(); }));
             //_targetCamera.transform.localRotation= Quaternion.Euler(0f, 0f, 180f);
-            RotateAnimation(_targetCamera.gameObject, _duration, new Vector3(0, 0, 0), (() => { }));
+            //RotateAnimation(_targetCamera.gameObject, _duration, new Vector3(0, 0, 0), (() => { }));
         }
 
         public void MoveYAnimation(GameObject gameObject, float duration, float delay, float yPosition,
