@@ -11,7 +11,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     #region Singleton Logic
-
     public static GameManager Instance { get; private set; }
 
     private void InitializeSingleton()
@@ -28,162 +27,173 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
     #endregion
 
     [SerializeField] private UIUpgradePanel upgradePanel = null;
-    [SerializeField] private RectTransform endgamePanelPrefab = null;
-    [SerializeField] private RectTransform endgamePanelAttachPoint = null;
-    private bool isGameEnded = false;
-
+    
 
     void Awake()
     {
-        isGameEnded = false;
         InitializeSingleton();
         InitializeDimensionMusicTheme();
 
         onLvlChanged += newLvl => upgradePanel.tryToOpenPanel();
+        Board.OnBoardChanged += ( firstList, secondList ) =>
+        {
+           if ( this == null || !this )
+              return;
+
+           cityBlockCount = firstList.Count + secondList.Count;
+        };
+
+    }
+
+    private float          timer_to_give_xp = 0f;
+    public  int            _cityBlockCount  = 0;
+    public  event Action<int> cityBlocksCountChanged  = delegate {  };
+    public int cityBlockCount
+    {
+       get => _cityBlockCount;
+       private set
+       {
+          _cityBlockCount = value;
+          cityBlocksCountChanged( _cityBlockCount );
+       }
+    }
+
+    public int   xpPerCityBlockPerSecond = 1;
+
+    private void Update()
+    {
+       timer_to_give_xp += Time.deltaTime;
+       if ( timer_to_give_xp > 1f )
+       {
+          timer_to_give_xp = 0;
+          xp += cityBlockCount * xpPerCityBlockPerSecond;
+       }
     }
 
     public bool IsUpgradesPanelActive()
     {
-        return upgradePanel.isActiveAndEnabled;
+       return upgradePanel.isActiveAndEnabled;
     }
-
+    
     private void Start()
     {
         init();
     }
 
-    private void OnZeroHealth()
-    {
-        isGameEnded = true;
-        FindObjectOfType<ShapeSpawner>().enabled = false;
+   #region Events
+   public event Action<int> onGoldChanged = delegate {}; 
+   public event Action<int> onXpChanged = delegate {}; 
+   public event Action<int> onLvlChanged = delegate {}; 
+   public event Action<int> onHealthChanged = delegate {};
+   #endregion
 
-        Time.timeScale = 0.0f;
-        Instantiate(endgamePanelPrefab, endgamePanelAttachPoint);
-    }
+   private void init()
+   {
+      gold = 0;
+      xp = 0;
+      health = maxHealth;
+      
+      upgradePanel.gameObject.SetActive( false );
+   }
 
-    #region Events
+   #region Economics
+   public int gold
+   {
+      get => _gold;
+      set
+      {
+         _gold = value;
+         onGoldChanged( _gold );
+      }
+   }
+   private int _gold = 0;
+   
+   public int xp
+   {
+      get => _xp;
+      set
+      {
+         int old_val = _xp;
+         _xp = value;
 
-    public event Action<int> onGoldChanged = delegate { };
-    public event Action<int> onXpChanged = delegate { };
-    public event Action<int> onLvlChanged = delegate { };
-    public event Action<int> onHealthChanged = delegate { };
+         int new_lvl = xpToLvl( _xp );
+         int old_lvl = xpToLvl( old_val );
+         if ( new_lvl > old_lvl )
+         {
+            onLvlChanged( new_lvl );
+         }
+            
+         
+         onXpChanged( _xp );
+      }
+   }
+   private int _xp = 0;
 
-    #endregion
+   public int lvl => xpToLvl( xp );
 
-    private void init()
-    {
-        gold = 0;
-        xp = 0;
-        health = maxHealth;
+   public int xpToLvl( int amount )
+   {
+      if ( amount >= 1200 )
+         return amount / 200;
 
-        upgradePanel.gameObject.SetActive(false);
-    }
+      if ( amount >= 1000 )
+         return 4;
 
-    #region Economics
+      if ( amount >= 500 )
+         return 3;
 
-    public int gold
-    {
-        get => _gold;
-        set
-        {
-            _gold = value;
-            onGoldChanged(_gold);
-        }
-    }
+      if ( amount >= 300 )
+         return 2;
+         
+      if ( amount >= 100 )
+         return 1;
 
-    private int _gold = 0;
+      return 0;
+   }
 
-    public int xp
-    {
-        get => _xp;
-        set
-        {
-            int old_val = _xp;
-            _xp = value;
+   public int lvlToXp( int lvl )
+   {
+      switch ( lvl )
+      {
+         case 0:  return 0;
+         case 1:  return 100;
+         case 2:  return 300;
+         case 3:  return 500;
+         case 4:  return 700;
+         case 5:  return 1000;
 
-            int new_lvl = xpToLvl(_xp);
-            int old_lvl = xpToLvl(old_val);
-            if (new_lvl > old_lvl)
-            {
-                onLvlChanged(new_lvl);
-            }
+         default: return lvl * 200;
+      }
+   }
 
+   public int health
+   {
+      get => _health;
+      set
+      {
+         _health = value;
+         if ( _health < 0 )
+            _health = 0;
 
-            onXpChanged(_xp);
-        }
-    }
+         if ( health >= maxHealth )
+            _health = maxHealth;
 
-    private int _xp = 0;
+         onHealthChanged( _health );
+      }
+   }
+   private int _health = 0;
 
-    public int lvl => xpToLvl(xp);
+   public int maxHealth = 100;
+   #endregion
 
-    public int xpToLvl(int amount)
-    {
-        if (amount >= 1000)
-            return 4;
-
-        if (amount >= 500)
-            return 3;
-
-        if (amount >= 300)
-            return 2;
-
-        if (amount >= 100)
-            return 1;
-
-        return 0;
-    }
-
-    public int lvlToXp(int lvl)
-    {
-        switch (lvl)
-        {
-            case 0: return 0;
-            case 1: return 100;
-            case 2: return 300;
-            case 3: return 500;
-            case 4: return 700;
-            case 5: return 1000;
-
-            default: return 99999999;
-        }
-    }
-
-    public int health
-    {
-        get => _health;
-        set
-        {
-            _health = value;
-            if (_health < 0)
-                _health = 0;
-
-            if (health >= maxHealth)
-                _health = maxHealth;
-
-            onHealthChanged(_health);
-            if (health == 0 && !isGameEnded)
-                OnZeroHealth();
-        }
-    }
-
-    private int _health = 0;
-
-    public int maxHealth = 100;
-
-    #endregion
-
-    #region Turrets
-
-    [SerializeField] public List<TurretsController> TurretControllers = null;
-
-    #endregion
-
-    #region WorldSwap
+   #region Turrets
+   [SerializeField] public List<TurretsController> TurretControllers = null;
+   #endregion
+   
+   #region WorldSwap
 
     [SerializeField] private WorldSwapper _worldSwapper;
 
@@ -209,5 +219,5 @@ public class GameManager : MonoBehaviour
         _bottomDimensionMusicTheme.enabled = !isTopDimension;
     }
 
-    #endregion
+   #endregion
 }

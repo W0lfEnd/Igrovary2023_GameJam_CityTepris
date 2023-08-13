@@ -7,6 +7,7 @@ namespace Enemies
     {
         public string _name;
         public Sprite sprite;
+        public AnimationClip animationClip;
         public int health;
         public int damage;
         public float movementSpeed;

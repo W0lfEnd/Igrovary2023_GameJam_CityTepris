@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5672272320151339405}
   - component: {fileID: 5864410906316669365}
   - component: {fileID: 2031755589798409652}
+  - component: {fileID: 2387093811916377200}
   m_Layer: 0
   m_Name: AirVfx
   m_TagString: Untagged
@@ -87,7 +88,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &2031755589798409652
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,4 +105,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &2387093811916377200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825802234126788199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19d23924826403996636fd4b513b32e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 50

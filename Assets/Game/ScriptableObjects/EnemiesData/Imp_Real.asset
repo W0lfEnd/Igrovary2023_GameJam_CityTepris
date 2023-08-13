@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Imp_Real
   sprite: {fileID: 21300000, guid: 255c32e777422e446910514b73aa3ab8, type: 3}
+  animationClip: {fileID: 7400000, guid: 3368d8c5d42e6e443a6f1c311bc7c259, type: 2}
   health: 1
   damage: 1
   movementSpeed: 0.9

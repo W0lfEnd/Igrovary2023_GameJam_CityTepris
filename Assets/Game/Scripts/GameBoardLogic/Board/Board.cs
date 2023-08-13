@@ -15,11 +15,11 @@ namespace Game.Scripts.GameBoardLogic.Board
         [SerializeField] private Transform OverworldTilesRoot;
         [SerializeField] private Transform UnderworldTilesRoot;
 
-        private BoardTile[,] _firstTiles;
-        private BoardTile[,] _secondTiles;
+        public BoardTile[,] _firstTiles;
+        public BoardTile[,] _secondTiles;
         private HighlightTile[,] _highlightTiles;
 
-        public static Action<List<GameObject>, List<GameObject>> OnBoardChanged;
+        public static event Action<List<GameObject>, List<GameObject>> OnBoardChanged = delegate {};
 
 
         private void Start()
