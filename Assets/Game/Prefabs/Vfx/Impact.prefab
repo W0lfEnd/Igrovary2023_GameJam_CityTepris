@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4447205022781836695}
   - component: {fileID: 2477756451208482223}
-  - component: {fileID: 8593487536687776933}
+  - component: {fileID: 7167380852936084272}
   m_Layer: 0
   m_Name: Impact
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8593487536687776933
+--- !u!95 &7167380852936084272
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
