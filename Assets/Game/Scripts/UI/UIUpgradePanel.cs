@@ -48,16 +48,16 @@ public class UIUpgradePanel : MonoBehaviour
             {
                 id = 0,
                 sprite = sprites[1],
-                title = "Ріжучі леза лазерної заточки",
-                description = () => "леза, що будуть крутитись покругу центрального будинку",
+                title = "Ріжучі леза",
+                description = () => "Леза, що будуть крутитись покругу центрального будинку",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.gameObject.SetActive( true ) )
             },
             [1] = new ()
             {
                 id = 1,
                 sprite = sprites[4],
-                title = "Придбати потужну 'Пушку масового ураження'",
-                description = () => "стріляє патронами, які взриваються",
+                title = "Нова пушка",
+                description = () => "Потужна пушка, яка стріляє вибуховими снарядами",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.gameObject.SetActive( true ) )
             },
             [2] = new ()
@@ -72,7 +72,7 @@ public class UIUpgradePanel : MonoBehaviour
             {
                 id = 3,
                 sprite = sprites[6],
-                title = "Пришвидшити 'Дефолтну зброю'",
+                title = "Пришвидшити 'Арбалету'",
                 description = () => "+1 в секунду",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttacksPerSecond++  )
             },
@@ -80,7 +80,7 @@ public class UIUpgradePanel : MonoBehaviour
             {
                 id = 4,
                 sprite = sprites[5],
-                title = "Збільшити радіус 'Дефолтної зброї'",
+                title = "Збільшити радіус 'Арбалету'",
                 description = () => "+20%",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
             },
@@ -88,25 +88,73 @@ public class UIUpgradePanel : MonoBehaviour
             {
                 id = 5,
                 sprite = sprites[7],
-                title = "Пришвидшити 'Пушку масового ураження'",
+                title = "Пришвидшити 'Пушку'",
                 description = () => "+1 в секунду",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttacksPerSecond++  )
             },
             [6] = new ()
             {
                 id = 6,
-                sprite = sprites[3],
-                title = "Збільшити радіус 'Пушки масового ураження'",
-                description = () => "+20%",
-                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttackRange *= 1.2f  )
+                sprite = sprites[7],
+                title = "Пришвидшити 'Пушку'",
+                description = () => "+1 в секунду",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttacksPerSecond++  )
             },
             [7] = new ()
             {
                 id = 7,
+                sprite = sprites[7],
+                title = "Пришвидшити 'Пушку'",
+                description = () => "+1 в секунду",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttacksPerSecond++  )
+            },
+            [8] = new ()
+            {
+                id = 8,
+                sprite = sprites[3],
+                title = "Збільшити радіус 'Пушки'",
+                description = () => "+20%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttackRange *= 1.2f  )
+            },
+            [9] = new ()
+            {
+                id = 9,
+                sprite = sprites[3],
+                title = "Збільшити радіус 'Пушки'",
+                description = () => "+20%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttackRange *= 1.2f  )
+            },
+            [10] = new ()
+            {
+                id = 10,
                 sprite = sprites[2],
-                title = "Збільшити радіус взриву 'Пушки масового ураження'",
+                title = "Збільшити вибух 'Пушки'",
                 description = () => "+40%",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.ExplosionRange *= 1.4f  )
+            },
+            [11] = new ()
+            {
+                id = 11,
+                sprite = sprites[5],
+                title = "Збільшити радіус 'Дефолтної зброї'",
+                description = () => "+20%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
+            },
+            [12] = new ()
+            {
+                id = 12,
+                sprite = sprites[5],
+                title = "Збільшити радіус 'Арбалету'",
+                description = () => "+20%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
+            },
+            [13] = new ()
+            {
+                id = 13,
+                sprite = sprites[5],
+                title = "Збільшити радіус 'Арбалету'",
+                description = () => "+20%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
             },
         };
 

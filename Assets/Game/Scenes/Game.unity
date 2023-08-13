@@ -179,7 +179,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainBuildingUnderworld
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3668255930790589434, guid: a6945d5802f4acc45a512756a9b1b1bc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -195,6 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9067227e7723145904026647f6ce50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &115280370 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4429046292853034366, guid: 4b108d12993d47b4d947cad2bfa37d58, type: 3}
+  m_PrefabInstance: {fileID: 4429046292985371916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &182762728
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,9 +1492,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 865634282}
     - target: {fileID: 2431136914436709047, guid: 884b4403a929f204f8b1863fe1fb0518, type: 3}
+      propertyPath: endgamePanelPrefab
+      value: 
+      objectReference: {fileID: 774208353375139322, guid: 5e278b240b8a7b24a90f099937341aff, type: 3}
+    - target: {fileID: 2431136914436709047, guid: 884b4403a929f204f8b1863fe1fb0518, type: 3}
       propertyPath: _topDimensionMusicTheme
       value: 
       objectReference: {fileID: 1834742859}
+    - target: {fileID: 2431136914436709047, guid: 884b4403a929f204f8b1863fe1fb0518, type: 3}
+      propertyPath: endgamePanelAttachPoint
+      value: 
+      objectReference: {fileID: 115280370}
     - target: {fileID: 2431136914436709047, guid: 884b4403a929f204f8b1863fe1fb0518, type: 3}
       propertyPath: _bottomDimensionMusicTheme
       value: 
@@ -1595,10 +1609,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3668255930790589433, guid: a6945d5802f4acc45a512756a9b1b1bc, type: 3}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3668255930790589433, guid: a6945d5802f4acc45a512756a9b1b1bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
