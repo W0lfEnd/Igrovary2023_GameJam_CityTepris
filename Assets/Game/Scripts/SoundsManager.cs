@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
@@ -10,6 +11,7 @@ public class SoundsManager : MonoBehaviour
     [SerializeField] private GameObject _soundsParent;
     [SerializeField] private AudioSource _soundPrefab;
     [SerializeField] private Sound[] _sounds;
+    private List<AudioSource> _instantiatedSounds = new();
 
     private void Awake() => InitializeSingleton();
 
@@ -28,18 +30,38 @@ public class SoundsManager : MonoBehaviour
         }
     }
 
-    public void TryPlaySoundByType(SoundType soundType)
+    public void TryPlaySoundByType(SoundType soundType, bool isLooped = false)
     {
         AudioClip audioClip = GetRandomAudioClipByType(soundType);
 
         if (audioClip == null)
             return;
 
-        AudioSource soundPrefab = Instantiate(_soundPrefab, _soundsParent.transform);
-        soundPrefab.clip = audioClip;
-        soundPrefab.Play();
+        AudioSource sound = Instantiate(_soundPrefab, _soundsParent.transform);
 
-        DOVirtual.DelayedCall(audioClip.length, () => Destroy(soundPrefab.gameObject));
+        sound.clip = audioClip;
+        sound.loop = isLooped;
+        sound.Play();
+
+        _instantiatedSounds.Add(sound);
+
+        if (isLooped)
+            return;
+
+        DOVirtual.DelayedCall(audioClip.length, () => Destroy(sound.gameObject));
+    }
+
+    public void StopAllSounds()
+    {
+        for (int i = 0; i < _instantiatedSounds.Count; i++)
+        {
+            if(_instantiatedSounds[i] != null)
+            {
+                Destroy(_instantiatedSounds[i].gameObject);
+            }
+        }
+
+        _instantiatedSounds.Clear();
     }
 
     private AudioClip GetRandomAudioClipByType(SoundType soundType)

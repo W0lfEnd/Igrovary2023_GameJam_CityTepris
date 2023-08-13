@@ -24,6 +24,16 @@ public class AllyBladeStorm : MonoBehaviour
         initBlades();
     }
 
+    public void DisplayBlades(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+
+        if (isActive)
+        {
+            SoundsManager.Instance.TryPlaySoundByType(SoundType.BladeSpinning, true);
+        }
+    }
+
     public void init( int bladesCount = 5 )
     {
         if ( bladesList.Count < bladesCount )
@@ -38,7 +48,7 @@ public class AllyBladeStorm : MonoBehaviour
 
         initBlades();
     }
-
+    
     private void initBlades()
     {
         if ( bladesList.Count == 0 )
@@ -50,7 +60,6 @@ public class AllyBladeStorm : MonoBehaviour
             bladesList[i].init( Damage );
             bladesList[i].transform.localPosition = AttackRadius * new Vector3( Mathf.Sin( i * radianBladeOffset ), Mathf.Cos( i * radianBladeOffset ), 0 );
             bladesList[i].transform.right = (transform.position - bladesList[i].transform.position).normalized;
-
         }
     }
 
@@ -58,7 +67,6 @@ public class AllyBladeStorm : MonoBehaviour
     {
         bladesRoot.Rotate( 0,0, Time.deltaTime * RotationSpeedInDeg );
     }
-    
 
     private void OnDrawGizmos()
     {
