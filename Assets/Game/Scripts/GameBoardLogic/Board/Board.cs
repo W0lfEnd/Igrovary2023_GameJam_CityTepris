@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enemies;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ namespace Game.Scripts.GameBoardLogic.Board
         private BoardTile[,] _firstTiles;
         private BoardTile[,] _secondTiles;
         private HighlightTile[,] _highlightTiles;
+
+        public static Action<List<GameObject>, List<GameObject>> OnBoardChanged;
 
 
         private void Start()
@@ -127,6 +130,30 @@ namespace Game.Scripts.GameBoardLogic.Board
             tile.transform.localPosition = new Vector3(boardIndex.x + 1, boardIndex.y + 1, 0);
 
             return true;
+        }
+
+        public void NotifyBoardChanged()
+        {
+            List<GameObject> first = new List<GameObject>();
+            List<GameObject> second = new List<GameObject>();
+
+            IterateABoard(_firstTiles, ((index, tile) =>
+            {
+                if (tile != null)
+                    first.Add(tile.gameObject);
+
+                return true;
+            }));
+
+            IterateABoard(_secondTiles, ((index, tile) =>
+            {
+                if (tile != null)
+                    second.Add(tile.gameObject);
+
+                return true;
+            }));
+
+            OnBoardChanged?.Invoke(first, second);
         }
 
         public Vector2Int? GetBoardIndexByWorldPosition(Vector3 WorldPosition)

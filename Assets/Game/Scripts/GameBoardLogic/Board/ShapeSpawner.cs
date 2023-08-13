@@ -119,13 +119,13 @@ namespace Game.Scripts.GameBoardLogic.Board
                 }
             }
 
-
             foreach (var instance in SpawnedInstances)
             {
                 Destroy(instance);
             }
 
             SpawnedInstances.Clear();
+            _board.NotifyBoardChanged();
         }
 
         private void SpawnNextShape()

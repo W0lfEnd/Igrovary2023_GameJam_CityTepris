@@ -117,9 +117,16 @@ public class EnemySpawner : MonoBehaviour
     {
         float angle = Random.Range(0.0f, 360.0f);
 
-        return new Vector2(
+        Vector2 pointInCircle = new Vector2(
             Mathf.Cos(angle * Mathf.Deg2Rad) * SpawnRadius,
             Mathf.Sin(angle * Mathf.Deg2Rad) * SpawnRadius
         );
+
+        Vector3 spawnerPosition = transform.position;
+
+        pointInCircle.x += spawnerPosition.x;
+        pointInCircle.y += spawnerPosition.y;
+
+        return pointInCircle;
     }
 }
