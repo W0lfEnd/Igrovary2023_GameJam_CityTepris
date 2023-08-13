@@ -166,37 +166,12 @@ public class GameManager : MonoBehaviour
 
    public int xpToLvl( int amount )
    {
-      if ( amount >= 1200 )
-         return amount / 200;
-
-      if ( amount >= 1000 )
-         return 4;
-
-      if ( amount >= 500 )
-         return 3;
-
-      if ( amount >= 300 )
-         return 2;
-         
-      if ( amount >= 100 )
-         return 1;
-
-      return 0;
+      return amount / 1000;
    }
 
    public int lvlToXp( int lvl )
    {
-      switch ( lvl )
-      {
-         case 0:  return 0;
-         case 1:  return 100;
-         case 2:  return 300;
-         case 3:  return 500;
-         case 4:  return 700;
-         case 5:  return 1000;
-
-         default: return lvl * 200;
-      }
+      return lvl * 1000;
    }
 
    public int health
