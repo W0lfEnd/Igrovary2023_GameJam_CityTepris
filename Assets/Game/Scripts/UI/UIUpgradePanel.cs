@@ -89,7 +89,7 @@ public class UIUpgradePanel : MonoBehaviour
         [0] = new ()
         {
             id = 0,
-            title = "Ріжучі леза залерної заточки",
+            title = "Ріжучі леза лазерної заточки",
             description = () => "леза, що будуть крутитись покругу центрального будинку",
             onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.gameObject.SetActive( true ) )
         },

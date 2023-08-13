@@ -9,12 +9,14 @@ using UnityEngine.Pool;
 
 public class AllyCanon : MonoBehaviour
 {
-    [SerializeField] private AllyCanonProjectile go_projectile   = null;
-    [SerializeField] private float                _Damage          = 10f;
-    [SerializeField] private float                _AttackEveryMs   = 1500f;
-    [SerializeField] private float                _ProjectileSpeed = 3f;
-    [SerializeField] private float                _AttackRange     = 4f;
-    [SerializeField] private float                _ExplosionRange  = 4f;
+    [SerializeField] private AllyCanonProjectile go_projectile        = null;
+    [SerializeField] private LineRenderer        line_renderer_radius = null;
+    [SerializeField] private float               _Damage              = 10f;
+    [SerializeField] private float               _AttackEveryMs       = 1500f;
+    [SerializeField] private float               _ProjectileSpeed     = 3f;
+    [SerializeField] private float               _AttackRange         = 4f;
+    [SerializeField] private float               _ExplosionRange      = 4f;
+
 
     public float AttacksPerSecond
     {
@@ -33,6 +35,7 @@ public class AllyCanon : MonoBehaviour
         set
         {
             _AttackRange = value;
+            setLineRendererRange ();
         }
     }
 
@@ -50,6 +53,10 @@ public class AllyCanon : MonoBehaviour
 
     private void Awake()
     {
+        line_renderer_radius.SetVertexCount (50 + 1);
+        line_renderer_radius.useWorldSpace = false;
+        setLineRendererRange();
+
         projectilesPool = new ObjectPool<AllyCanonProjectile>(
             () =>
             {
@@ -101,5 +108,24 @@ public class AllyCanon : MonoBehaviour
         Gizmos.DrawWireSphere( transform.position, AttackRange );
         // Gizmos.color = Color.blue;
         // Gizmos.DrawSphere( transform.position, TimeToNextShot / AttackEveryMs );
+    }
+
+    void setLineRendererRange ()
+    {
+        float x;
+        float y;
+        float z;
+
+        float angle = 20f;
+
+        for (int i = 0; i < (50 + 1); i++)
+        {
+            x = Mathf.Sin (Mathf.Deg2Rad * angle) * AttackRange;
+            y = Mathf.Cos (Mathf.Deg2Rad * angle) * AttackRange;
+
+            line_renderer_radius.SetPosition (i, new Vector3(x, y, 0) );
+
+            angle += (360f / 50);
+        }
     }
 }
