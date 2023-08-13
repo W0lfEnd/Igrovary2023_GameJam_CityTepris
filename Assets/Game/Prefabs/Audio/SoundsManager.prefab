@@ -48,8 +48,7 @@ MonoBehaviour:
   _soundPrefab: {fileID: 2931191024785881427, guid: c8439cb5251c5d64cb1e469c37ddcbd3, type: 3}
   _sounds:
   - type: 0
-    audioClips:
-    - {fileID: 8300000, guid: 89d41af2a63bf444389ab65e3568b5d8, type: 3}
+    audioClips: []
   - type: 1
     audioClips:
     - {fileID: 8300000, guid: 89d41af2a63bf444389ab65e3568b5d8, type: 3}

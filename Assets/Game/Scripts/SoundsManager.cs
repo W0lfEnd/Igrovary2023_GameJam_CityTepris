@@ -39,6 +39,11 @@ public class SoundsManager : MonoBehaviour
 
         AudioSource sound = Instantiate(_soundPrefab, _soundsParent.transform);
 
+        if(soundType == SoundType.EnemyHit || soundType == SoundType.EnemyDeath)
+        {
+            sound.volume = 0.1f;
+        }
+
         sound.clip = audioClip;
         sound.loop = isLooped;
         sound.Play();
