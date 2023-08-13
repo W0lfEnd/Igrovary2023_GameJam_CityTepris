@@ -16,7 +16,7 @@ namespace Game.Scripts.GameBoardLogic.Board
     {
         [SerializeField] private GameObject ItemPrefab;
         [SerializeField] private BuildShape[] Shapes;
-        [SerializeField] private float SpawnCoolDown;
+        [SerializeField] public float SpawnCoolDown;
 
         private Unity.Mathematics.Random _random;
         private List<GameObject> SpawnedInstances;
@@ -25,6 +25,7 @@ namespace Game.Scripts.GameBoardLogic.Board
         private Board _board;
 
         public static Action<ShapeSpawner> OnFigureSpawned;
+        public        float                timeToSpawn = 0f;
 
 
         public void Start()
@@ -48,7 +49,7 @@ namespace Game.Scripts.GameBoardLogic.Board
             if (SpawnedInstances.Count > 0)
                 _lastTimeSpawned = Time.time;
 
-            if (Time.time - _lastTimeSpawned < SpawnCoolDown)
+            if ((timeToSpawn = (Time.time - _lastTimeSpawned)) < SpawnCoolDown)
                 return;
 
             _lastTimeSpawned = Time.time;
