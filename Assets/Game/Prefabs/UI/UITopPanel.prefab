@@ -734,6 +734,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseBtn
       objectReference: {fileID: 0}
+    - target: {fileID: 7779517140735803015, guid: 60ceb20c6ebc7b749be3c1ed291041a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779517140991583999, guid: 60ceb20c6ebc7b749be3c1ed291041a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779517140991583999, guid: 60ceb20c6ebc7b749be3c1ed291041a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779517140991583999, guid: 60ceb20c6ebc7b749be3c1ed291041a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 310227307756299354}
+    - target: {fileID: 7779517140991583999, guid: 60ceb20c6ebc7b749be3c1ed291041a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779517140991583999, guid: 60ceb20c6ebc7b749be3c1ed291041a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60ceb20c6ebc7b749be3c1ed291041a0, type: 3}
 --- !u!224 &775050615227782247 stripped
