@@ -32,12 +32,17 @@ public class GameManager : MonoBehaviour
 
    #region Events
    public event Action<int> onGoldChanged = delegate {}; 
+   public event Action<int> onXpChanged = delegate {}; 
+   public event Action<int> onLvlChanged = delegate {}; 
+   public event Action<int> onHealthChanged = delegate {};
    #endregion
 
    private void init()
    {
       turretsLvl = 0;
       gold = 0;
+      xp = 0;
+      health = maxHealth;
    }
 
    #region Economics
@@ -50,7 +55,55 @@ public class GameManager : MonoBehaviour
          onGoldChanged( _gold );
       }
    }
-   public int _gold = 0;
+   private int _gold = 0;
+   
+   public int xp
+   {
+      get => _xp;
+      set
+      {
+         int old_val = _xp;
+         _xp = value;
+
+         if ( xpToLvl( _xp ) > xpToLvl( old_val ) )
+            onLvlChanged( xpToLvl( old_val ) );
+         
+         onXpChanged( _xp );
+      }
+   }
+   private int _xp = 0;
+
+   public int lvl => xpToLvl( xp );
+
+   public int xpToLvl( int amount )
+   {
+      if ( xp > 1000 )
+         return 4;
+
+      if ( xp > 500 )
+         return 3;
+
+      if ( xp > 300 )
+         return 2;
+         
+      if ( xp > 100 )
+         return 1;
+
+      return 0;
+   }
+
+   public int health
+   {
+      get => _health;
+      set
+      {
+         _health = value;
+         onHealthChanged( _health );
+      }
+   }
+   private int _health = 0;
+
+   public int maxHealth = 100;
    #endregion
 
    #region Turrets
@@ -64,7 +117,7 @@ public class GameManager : MonoBehaviour
       }
    }
 
-   public int _turretLvl = 0;
+   private int _turretLvl = 0;
 
    [SerializeField] private List<TurretsController> TurretControllers = null;
 

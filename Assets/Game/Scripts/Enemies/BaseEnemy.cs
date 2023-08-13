@@ -14,6 +14,7 @@ namespace Enemies
         public bool isDragged = false;
 
         private int _health;
+        private int _maxHealth;
 
         private int _defaultDamage;
         private int _currentDamage;
@@ -117,6 +118,7 @@ namespace Enemies
 
             _spriteRenderer.sprite = enemyData.sprite;
 
+            _maxHealth = enemyData.health;
             _health = enemyData.health;
 
             _defaultDamage = enemyData.damage;
@@ -164,6 +166,8 @@ namespace Enemies
         {
             _buildingsDistancer.onBuild -= TrySetNewClosestBuilding;
             gameObject.SetActive(false);
+
+            GameManager.Instance.xp += (int)(_maxHealth / 3f);
         }
 
         private IEnumerator DelayedAction(float delay, Action callback)
