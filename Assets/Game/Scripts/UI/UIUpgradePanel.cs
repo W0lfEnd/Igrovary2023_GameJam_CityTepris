@@ -177,16 +177,24 @@ public class UIUpgradePanel : MonoBehaviour
                 id = 16,
                 sprite = sprites[1],
                 title = "Збільшити радіус 'Ріжучих лез'",
-                description = () => "+30%",
+                description = () => "+50%",
                 onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.AttackRadius *= 1.3f )
             },
             [17] = new ()
             {
                 id = 17,
                 sprite = sprites[1],
+                title = "Збільшити радіус 'Ріжучих лез'",
+                description = () => "+50%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.AttackRadius *= 1.5f )
+            },
+            [18] = new ()
+            {
+                id = 18,
+                sprite = sprites[1],
                 title = "Пришвидшити 'Ріжучі леза'",
-                description = () => "+30%",
-                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.RotationSpeedInDeg *= 1.3f )
+                description = () => "+50%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.RotationSpeedInDeg *= 1.5f )
             },
             
         };
