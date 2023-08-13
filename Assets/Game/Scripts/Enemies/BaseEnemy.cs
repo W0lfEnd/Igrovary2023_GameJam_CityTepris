@@ -2,6 +2,7 @@ using Clicker;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts.GameBoardLogic.Board;
 using UnityEngine;
 
 namespace Enemies
@@ -34,13 +35,15 @@ namespace Enemies
 
         private void Update() => TryToMoveTowardsClosestBuilding();
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D( Collider2D col )
         {
-            if ( collision.gameObject.GetComponent<TurretsController>() )
+            if ( col.gameObject.GetComponent<TurretsController>() || col.gameObject.GetComponent<BoardTile>() )
+            {
                 GameManager.Instance.health -= _currentDamage;
-
-            //do damage to the building, deactivate this object and then return to pool?
+                Destroy();
+            }
         }
+
 
         public void Initialize(EnemyData enemyData, Dimension spawnDimension, BuildingsDistancer buildingsDistancer)
         {
