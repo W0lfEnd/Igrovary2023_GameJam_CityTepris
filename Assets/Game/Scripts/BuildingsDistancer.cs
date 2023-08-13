@@ -1,14 +1,16 @@
 using Enemies;
+using Game.Scripts.GameBoardLogic.Board;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildingsDistancer : MonoBehaviour
 {
-    public Action<Dimension> onBuild;
+    public Action onBuild;
 
     [SerializeField] private GameObject _topMainBuilding;
     [SerializeField] private GameObject _bottomMainBuilding;
+
     private List<GameObject> _topBuildings = new();
     private List<GameObject> _bottomBuildings = new();
 
@@ -17,6 +19,8 @@ public class BuildingsDistancer : MonoBehaviour
     private void Initialize() //subscrive on game start event
     {
         Validate();
+
+        Board.OnBoardChanged += AddBuilding;
 
         _topBuildings.Add(_topMainBuilding);
         _bottomBuildings.Add(_bottomMainBuilding);
@@ -28,26 +32,17 @@ public class BuildingsDistancer : MonoBehaviour
         _bottomBuildings.Clear();
     }
 
-    private void AddBuilding(GameObject building, Dimension buildingDimension) //subscribe onBuild action
+    private void AddBuilding(List<GameObject> topBuildings, List<GameObject> lowBuildings)
     {
-        switch (buildingDimension)
-        {
-            case Dimension.TopDimesion:
-                {
-                    _topBuildings.Add(building);
-                    break;
-                }
-            case Dimension.BottomDimension:
-                {
-                    _bottomBuildings.Add(building);
-                    break;
-                }
-            default:
-                {
-                    _topBuildings.Add(building);
-                    break;
-                }
-        }
+        Validate();
+
+        _topBuildings.Add(_topMainBuilding);
+        _bottomBuildings.Add(_bottomMainBuilding);
+
+        _topBuildings.AddRange(topBuildings);
+        _bottomBuildings.AddRange(lowBuildings);
+
+        onBuild?.Invoke();
     }
 
     public GameObject TryGetClosestBuilding(BaseEnemy enemy, Dimension enemyDimension)

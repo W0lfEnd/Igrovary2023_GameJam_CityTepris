@@ -1,6 +1,7 @@
 using Clicker;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enemies
@@ -157,11 +158,8 @@ namespace Enemies
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
 
-        private void TrySetNewClosestBuilding(Dimension buildingDimension)
+        private void TrySetNewClosestBuilding()
         {
-            if (buildingDimension != _currentDimension)
-                return;
-
             _closestBuildingTarget = _buildingsDistancer.TryGetClosestBuilding(this, _currentDimension);
         }
 
