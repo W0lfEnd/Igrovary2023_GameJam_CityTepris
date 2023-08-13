@@ -1,7 +1,10 @@
 using Enemies;
 using Game.Scripts;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Enemies;
+using Game.Scripts;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -36,130 +39,136 @@ public class GameManager : MonoBehaviour
         init();
     }
 
-    #region Events
-    public event Action<int> onGoldChanged = delegate { };
-    public event Action<int> onXpChanged = delegate { };
-    public event Action<int> onLvlChanged = delegate { };
-    public event Action<int> onHealthChanged = delegate { };
-    #endregion
+   #region Events
+   public event Action<int> onGoldChanged = delegate {}; 
+   public event Action<int> onXpChanged = delegate {}; 
+   public event Action<int> onLvlChanged = delegate {}; 
+   public event Action<int> onHealthChanged = delegate {};
+   #endregion
 
-    private void init()
-    {
-        turretsLvl = 0;
-        gold = 0;
-        xp = 0;
-        health = maxHealth;
-    }
+   private void init()
+   {
+      turretsLvl = 0;
+      gold = 0;
+      xp = 0;
+      health = maxHealth;
+   }
 
-    #region Economics
-    public int gold
-    {
-        get => _gold;
-        set
-        {
-            _gold = value;
-            onGoldChanged(_gold);
-        }
-    }
-    private int _gold = 0;
+   #region Economics
+   public int gold
+   {
+      get => _gold;
+      set
+      {
+         _gold = value;
+         onGoldChanged( _gold );
+      }
+   }
+   private int _gold = 0;
+   
+   public int xp
+   {
+      get => _xp;
+      set
+      {
+         int old_val = _xp;
+         _xp = value;
 
-    public int xp
-    {
-        get => _xp;
-        set
-        {
-            int old_val = _xp;
-            _xp = value;
+         int new_lvl = xpToLvl( _xp );
+         int old_lvl = xpToLvl( old_val );
+         if ( new_lvl > old_lvl )
+         {
+            onLvlChanged( new_lvl );
+            turretsLvl = new_lvl;
+         }
+            
+         
+         onXpChanged( _xp );
+      }
+   }
+   private int _xp = 0;
 
-            int new_lvl = xpToLvl(_xp);
-            int old_lvl = xpToLvl(old_val);
-            if (new_lvl > old_lvl)
-            {
-                onLvlChanged(new_lvl);
-                turretsLvl = new_lvl;
-            }
+   public int lvl => xpToLvl( xp );
 
+   public int xpToLvl( int amount )
+   {
+      if ( amount >= 1000 )
+         return 4;
 
-            onXpChanged(_xp);
-        }
-    }
-    private int _xp = 0;
+      if ( amount >= 500 )
+         return 3;
 
-    public int lvl => xpToLvl(xp);
+      if ( amount >= 300 )
+         return 2;
+         
+      if ( amount >= 100 )
+         return 1;
 
-    public int xpToLvl(int amount)
-    {
-        if (amount >= 1000)
-            return 4;
+      return 0;
+   }
 
-        if (amount >= 500)
-            return 3;
+   public int lvlToXp( int lvl )
+   {
+      switch ( lvl )
+      {
+         case 0:  return 0;
+         case 1:  return 100;
+         case 2:  return 300;
+         case 3:  return 500;
+         case 4:  return 700;
+         case 5:  return 1000;
 
-        if (amount >= 300)
-            return 2;
+         default: return 99999999;
+      }
+   }
 
-        if (amount >= 100)
-            return 1;
+   public int health
+   {
+      get => _health;
+      set
+      {
+         _health = value;
+         if ( _health < 0 )
+            _health = 0;
 
-        return 0;
-    }
+         if ( health >= maxHealth )
+            _health = maxHealth;
 
-    public int lvlToXp(int lvl)
-    {
-        switch (lvl)
-        {
-            case 0: return 0;
-            case 1: return 100;
-            case 2: return 300;
-            case 3: return 500;
-            case 4: return 700;
-            case 5: return 1000;
+         onHealthChanged( _health );
+      }
+   }
+   private int _health = 0;
 
-            default: return 99999999;
-        }
-    }
+   public int maxHealth = 100;
+   #endregion
 
-    public int health
-    {
-        get => _health;
-        set
-        {
-            _health = value;
-            onHealthChanged(_health);
-        }
-    }
-    private int _health = 0;
+   #region Turrets
+   public int turretsLvl
+   {
+      get => _turretLvl;
+      set
+      {
+         _turretLvl = value;
+         setTurretsLvl( _turretLvl );
+      }
+   }
 
-    public int maxHealth = 100;
-    #endregion
+   private int _turretLvl = 0;
 
-    #region Turrets
-    public int turretsLvl
-    {
-        get => _turretLvl;
-        set
-        {
-            _turretLvl = value;
-            setTurretsLvl(_turretLvl);
-        }
-    }
+   [SerializeField] private List<TurretsController> TurretControllers = null;
 
-    private int _turretLvl = 0;
+   public void setTurretsLvl( int lvl )
+   {
+      foreach ( TurretsController turretController in TurretControllers )
+      {
+         turretController.init( lvl );
+      }
+   }
 
-    [SerializeField] private List<TurretsController> TurretControllers = null;
-
-    public void setTurretsLvl(int lvl)
-    {
-        foreach (TurretsController turretController in TurretControllers)
-        {
-            turretController.init(lvl);
-        }
-    }
-
-    public void CHEAT_upgradeTurretsLvl() => turretsLvl++;
-    #endregion
-
-    #region WorldSwap
+   public void CHEAT_upgradeTurretsLvl() => turretsLvl++;
+   #endregion
+   
+   #region WorldSwap
 
     [SerializeField] private WorldSwapper _worldSwapper;
 
@@ -185,5 +194,5 @@ public class GameManager : MonoBehaviour
         _bottomDimensionMusicTheme.enabled = !isTopDimension;
     }
 
-    #endregion
+   #endregion
 }

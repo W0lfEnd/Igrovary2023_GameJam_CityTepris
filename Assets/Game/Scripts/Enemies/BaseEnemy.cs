@@ -35,6 +35,9 @@ namespace Enemies
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            if ( collision.gameObject.GetComponent<TurretsController>() )
+                GameManager.Instance.health -= _currentDamage;
+
             //do damage to the building, deactivate this object and then return to pool?
         }
 

@@ -14,7 +14,7 @@ public class AllyCanon : MonoBehaviour
     [SerializeField] private float                AttackEveryMs   = 1500f;
     [SerializeField] private float                ProjectileSpeed = 3f;
     [SerializeField] private float                AttackRange     = 4f;
-    [SerializeField] private float                ExplosionRange  = 10f;
+    [SerializeField] private float                ExplosionRange  = 1.5f;
 
     private float                           TimeToNextShot  = 0.0f;
     private ObjectPool<AllyCanonProjectile> projectilesPool = null;
