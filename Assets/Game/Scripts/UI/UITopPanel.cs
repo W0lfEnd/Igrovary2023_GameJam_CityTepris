@@ -18,7 +18,7 @@ public class UITopPanel : MonoBehaviour
     {
         gm.onLvlChanged += new_lvl => initXpBar();
         gm.onXpChanged += new_lvl => setValXpBar();
-        gm.cityBlocksCountChanged += blocksCount => txtXpInfo.text = $"За один кожен домік ти отримуєш {gm.xpPerCityBlockPerSecond}/сек, всього: {blocksCount * gm.xpPerCityBlockPerSecond}/сек";
+        gm.cityBlocksCountChanged += blocksCount => txtXpInfo.text = $"За один кожен домік ти отримуєш {gm.xpPerCityBlockPerSecond}xp/сек, всього: {blocksCount * gm.xpPerCityBlockPerSecond}xp/сек";
 
         barHealth.Initialize( gm.maxHealth );
         gm.onHealthChanged += health => barHealth.SetValue( health );
