@@ -105,5 +105,7 @@ public class GameManager : MonoBehaviour
 
       return false;
    }
+
+   public void CHEAT_upgradeTurretsLvl() => turretsLvl++;
    #endregion
 }
