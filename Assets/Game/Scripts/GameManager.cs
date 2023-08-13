@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enemies;
+using Game.Scripts;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -107,5 +109,17 @@ public class GameManager : MonoBehaviour
    }
 
    public void CHEAT_upgradeTurretsLvl() => turretsLvl++;
+   #endregion
+   
+   #region WorldSwap
+
+   [SerializeField] private WorldSwapper _worldSwapper;
+   public Dimension Dimension => _worldSwapper.DimensionType;
+
+   public void SwapWorld()
+   {
+      _worldSwapper.SwapWorld();
+   }
+
    #endregion
 }
