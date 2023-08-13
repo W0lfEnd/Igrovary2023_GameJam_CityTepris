@@ -29,11 +29,17 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField] private RectTransform gameoverPrefab        = null;
+    [SerializeField] private RectTransform gameoverParent        = null;
     [SerializeField] private UIUpgradePanel upgradePanel = null;
-    
+    private int enemiesDied;
+    private float startedPlayingAt;
+    private bool hasEndedGame = false;
 
     void Awake()
     {
+       enemiesDied = 0;
+       startedPlayingAt = Time.time;
         InitializeSingleton();
         InitializeDimensionMusicTheme();
 
@@ -50,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     private float          timer_to_give_xp = 0f;
     public  int            _cityBlockCount  = 0;
+    
     public  event Action<int> cityBlocksCountChanged  = delegate {  };
     public int cityBlockCount
     {
@@ -73,6 +80,29 @@ public class GameManager : MonoBehaviour
        }
     }
 
+    private void ShowEndgamePanel()
+    {
+       hasEndedGame = true;
+       var gameover = Instantiate(gameoverPrefab,gameoverParent);
+
+       Time.timeScale = 0;
+       FindObjectOfType<ShapeSpawner>().enabled = false;
+    }
+    public void OnEnemyDied()
+    {
+       enemiesDied++;
+    }
+
+    public int GetEnemiesDied()
+    {
+       return enemiesDied;
+    }
+
+    public float GetPlayTime()
+    {
+       return Time.time - startedPlayingAt;
+    }
+    
     public bool IsUpgradesPanelActive()
     {
        return upgradePanel.isActiveAndEnabled;
@@ -182,6 +212,11 @@ public class GameManager : MonoBehaviour
             _health = maxHealth;
 
          onHealthChanged( _health );
+
+         if (health <= 0 && !hasEndedGame)
+         {
+            ShowEndgamePanel();
+         }
       }
    }
    private int _health = 0;

@@ -71,6 +71,7 @@ namespace Enemies
 
             if (_health <= 0)
             {
+                GameManager.Instance.OnEnemyDied();
                 Destroy();
             }
         }

@@ -16,42 +16,21 @@ namespace Game.Scripts.UI
         [SerializeField] private Button _restartButton;
 
         private const string _enemiesKilledTextPrefix = "Знищено ворогів: ";
-        private const string _timeSurvivedTimeTextPrefix = "Часу пережито: ";
+        private const string _timeSurvivedTimeTextPrefix = "Часу пережито: {0}c.";
         private const string _totalScoreTextPrefix = "Total score: ";
 
         private void Awake() => Initialize();
 
-        public void Show()
-        {
-            Configurate();
-            _parentCanvas.gameObject.SetActive(true);
-        }
-
-        private void Hide()
-        {
-            _parentCanvas.gameObject.SetActive(false);
-            Clear();
-        }
 
         private void Initialize()
         {
-            Hide();
             InitializeRestartButton();
-        }
 
-        private void Configurate()
-        {
-            //parse data from static GameManager
 
-            //_enemiesKilledTextLabel.text = _enemiesKilledTextPrefix + ;
-            //_timeSurvivedTimeTextLabel.text = _timeSurvivedTimeTextPrefix + ;
-            //_totalScoreTextLabel.text = _totalScoreTextPrefix + ;
-        }
-
-        private void Clear()
-        {
-            _enemiesKilledTextLabel.text = _enemiesKilledTextPrefix;
-            _timeSurvivedTimeTextLabel.text = _timeSurvivedTimeTextPrefix;
+            _enemiesKilledTextLabel.text = _enemiesKilledTextPrefix + GameManager.Instance.GetEnemiesDied();
+            _timeSurvivedTimeTextLabel.text = _timeSurvivedTimeTextPrefix +
+                                              string.Format(_timeSurvivedTimeTextPrefix,
+                                                  GameManager.Instance.GetPlayTime());
         }
 
         private void InitializeRestartButton()
@@ -62,7 +41,6 @@ namespace Game.Scripts.UI
                 var scene = SceneManager.GetActiveScene();
                 SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
             }));
-            _restartButton.onClick.AddListener(Hide);
         }
     }
 }
