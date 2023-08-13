@@ -81,7 +81,7 @@ public class SoundsManager : MonoBehaviour
     }
 }
 
-public enum SoundType { EnemyHit, EnemyDeath, WorldFlip, TurretReloading, TurretShoot, BladeSpinning }
+public enum SoundType { EnemyHit, EnemyDeath, WorldFlip, TurretReloading, TurretShoot, BladeSpinning, CannonShot, CannonExplosion }
 
 [Serializable]
 public struct Sound

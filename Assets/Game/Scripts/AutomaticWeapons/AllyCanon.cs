@@ -62,6 +62,8 @@ public class AllyCanon : MonoBehaviour
         var bullet = projectilesPool.Get();
         bullet.transform.position = transform.position;
         bullet.init( target, Damage, ProjectileSpeed, ExplosionRange, () => projectilesPool.Release( bullet ) );
+
+        SoundsManager.Instance.TryPlaySoundByType(SoundType.CannonShot);
     }
 
     private void OnDrawGizmos()
