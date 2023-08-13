@@ -1,167 +1,189 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Enemies;
 using Game.Scripts;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-   #region Singleton Logic
-   public static GameManager Instance { get; private set; }
+    #region Singleton Logic
+    public static GameManager Instance { get; private set; }
+
+    private void InitializeSingleton()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            if (Instance == this)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+    #endregion
+
+    void Awake()
+    {
+        InitializeSingleton();
+        InitializeDimensionMusicTheme();
+    }
+
+    private void Start()
+    {
+        init();
+    }
+
+    #region Events
+    public event Action<int> onGoldChanged = delegate { };
+    public event Action<int> onXpChanged = delegate { };
+    public event Action<int> onLvlChanged = delegate { };
+    public event Action<int> onHealthChanged = delegate { };
+    #endregion
+
+    private void init()
+    {
+        turretsLvl = 0;
+        gold = 0;
+        xp = 0;
+        health = maxHealth;
+    }
+
+    #region Economics
+    public int gold
+    {
+        get => _gold;
+        set
+        {
+            _gold = value;
+            onGoldChanged(_gold);
+        }
+    }
+    private int _gold = 0;
+
+    public int xp
+    {
+        get => _xp;
+        set
+        {
+            int old_val = _xp;
+            _xp = value;
+
+            int new_lvl = xpToLvl(_xp);
+            int old_lvl = xpToLvl(old_val);
+            if (new_lvl > old_lvl)
+            {
+                onLvlChanged(new_lvl);
+                turretsLvl = new_lvl;
+            }
 
 
-   void Awake()
-   {
-      if ( Instance == null )
-      {
-         Instance = this;
-      }
-      else
-      if ( Instance == this )
-      {
-         Destroy( gameObject );
-      }
-   }
+            onXpChanged(_xp);
+        }
+    }
+    private int _xp = 0;
 
-   private void Start()
-   {
-      init();
-   }
-   #endregion
+    public int lvl => xpToLvl(xp);
 
-   #region Events
-   public event Action<int> onGoldChanged = delegate {}; 
-   public event Action<int> onXpChanged = delegate {}; 
-   public event Action<int> onLvlChanged = delegate {}; 
-   public event Action<int> onHealthChanged = delegate {};
-   #endregion
+    public int xpToLvl(int amount)
+    {
+        if (amount >= 1000)
+            return 4;
 
-   private void init()
-   {
-      turretsLvl = 0;
-      gold = 0;
-      xp = 0;
-      health = maxHealth;
-   }
+        if (amount >= 500)
+            return 3;
 
-   #region Economics
-   public int gold
-   {
-      get => _gold;
-      set
-      {
-         _gold = value;
-         onGoldChanged( _gold );
-      }
-   }
-   private int _gold = 0;
-   
-   public int xp
-   {
-      get => _xp;
-      set
-      {
-         int old_val = _xp;
-         _xp = value;
+        if (amount >= 300)
+            return 2;
 
-         int new_lvl = xpToLvl( _xp );
-         int old_lvl = xpToLvl( old_val );
-         if ( new_lvl > old_lvl )
-         {
-            onLvlChanged( new_lvl );
-            turretsLvl = new_lvl;
-         }
-            
-         
-         onXpChanged( _xp );
-      }
-   }
-   private int _xp = 0;
+        if (amount >= 100)
+            return 1;
 
-   public int lvl => xpToLvl( xp );
+        return 0;
+    }
 
-   public int xpToLvl( int amount )
-   {
-      if ( amount >= 1000 )
-         return 4;
+    public int lvlToXp(int lvl)
+    {
+        switch (lvl)
+        {
+            case 0: return 0;
+            case 1: return 100;
+            case 2: return 300;
+            case 3: return 500;
+            case 4: return 700;
+            case 5: return 1000;
 
-      if ( amount >= 500 )
-         return 3;
+            default: return 99999999;
+        }
+    }
 
-      if ( amount >= 300 )
-         return 2;
-         
-      if ( amount >= 100 )
-         return 1;
+    public int health
+    {
+        get => _health;
+        set
+        {
+            _health = value;
+            onHealthChanged(_health);
+        }
+    }
+    private int _health = 0;
 
-      return 0;
-   }
+    public int maxHealth = 100;
+    #endregion
 
-   public int lvlToXp( int lvl )
-   {
-      switch ( lvl )
-      {
-         case 0:  return 0;
-         case 1:  return 100;
-         case 2:  return 300;
-         case 3:  return 500;
-         case 4:  return 700;
-         case 5:  return 1000;
+    #region Turrets
+    public int turretsLvl
+    {
+        get => _turretLvl;
+        set
+        {
+            _turretLvl = value;
+            setTurretsLvl(_turretLvl);
+        }
+    }
 
-         default: return 99999999;
-      }
-   }
+    private int _turretLvl = 0;
 
-   public int health
-   {
-      get => _health;
-      set
-      {
-         _health = value;
-         onHealthChanged( _health );
-      }
-   }
-   private int _health = 0;
+    [SerializeField] private List<TurretsController> TurretControllers = null;
 
-   public int maxHealth = 100;
-   #endregion
+    public void setTurretsLvl(int lvl)
+    {
+        foreach (TurretsController turretController in TurretControllers)
+        {
+            turretController.init(lvl);
+        }
+    }
 
-   #region Turrets
-   public int turretsLvl
-   {
-      get => _turretLvl;
-      set
-      {
-         _turretLvl = value;
-         setTurretsLvl( _turretLvl );
-      }
-   }
+    public void CHEAT_upgradeTurretsLvl() => turretsLvl++;
+    #endregion
 
-   private int _turretLvl = 0;
+    #region WorldSwap
 
-   [SerializeField] private List<TurretsController> TurretControllers = null;
+    [SerializeField] private WorldSwapper _worldSwapper;
 
-   public void setTurretsLvl( int lvl )
-   {
-      foreach ( TurretsController turretController in TurretControllers )
-      {
-         turretController.init( lvl );
-      }
-   }
+    public Dimension Dimension => _worldSwapper.DimensionType;
 
-   public void CHEAT_upgradeTurretsLvl() => turretsLvl++;
-   #endregion
-   
-   #region WorldSwap
+    public void SwapWorld()
+    {
+        _worldSwapper.SwapWorld();
+        InitializeDimensionMusicTheme();
+    }
 
-   [SerializeField] private WorldSwapper _worldSwapper;
-   public Dimension Dimension => _worldSwapper.DimensionType;
+    #endregion
 
-   public void SwapWorld()
-   {
-      _worldSwapper.SwapWorld();
-   }
+    #region DimensionMusicTheme
 
-   #endregion
+    [SerializeField] private AudioSource _topDimensionMusicTheme;
+    [SerializeField] private AudioSource _bottomDimensionMusicTheme;
+
+    private void InitializeDimensionMusicTheme()
+    {
+        bool isTopDimension = Dimension == Dimension.TopDimesion;
+        _topDimensionMusicTheme.enabled = isTopDimension;
+        _bottomDimensionMusicTheme.enabled = !isTopDimension;
+    }
+
+    #endregion
 }
