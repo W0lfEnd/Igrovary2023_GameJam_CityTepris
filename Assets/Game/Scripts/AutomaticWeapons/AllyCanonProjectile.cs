@@ -83,12 +83,12 @@ public class AllyCanonProjectile : MonoBehaviour
         DOTween.Kill( tweener_explosion );
     }
 
-    private void OnTriggerEnter2D( Collision2D col )
+    private void OnTriggerEnter2D( Collider2D col )
     {
         col.gameObject.GetComponent<BaseEnemy>()?.Damage( (int)damage );
     }
     
-    private void OnTriggerStay2D( Collision2D col )
+    private void OnTriggerStay2D( Collider2D col )
     {
         col.gameObject.GetComponent<BaseEnemy>()?.Damage( (int)damage );
     }
