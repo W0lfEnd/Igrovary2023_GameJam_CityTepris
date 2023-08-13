@@ -1082,7 +1082,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -1223,6 +1222,7 @@ MonoBehaviour:
     - {x: 2, y: 2}
     - {x: 1, y: 1}
   SpawnCoolDown: 10
+  timeToSpawn: 0
 --- !u!4 &1823726164
 Transform:
   m_ObjectHideFlags: 0
@@ -1471,6 +1471,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2431136914436709047, guid: 884b4403a929f204f8b1863fe1fb0518, type: 3}
+      propertyPath: shapeSpawner
+      value: 
+      objectReference: {fileID: 1823726163}
     - target: {fileID: 2431136914436709047, guid: 884b4403a929f204f8b1863fe1fb0518, type: 3}
       propertyPath: upgradePanel
       value: 

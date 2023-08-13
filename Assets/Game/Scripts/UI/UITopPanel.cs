@@ -10,6 +10,7 @@ public class UITopPanel : MonoBehaviour
     [SerializeField] private UiBar barHealth = null;
     [SerializeField] private UiBar barXp     = null;
     [SerializeField] private TextMeshProUGUI txtXpInfo     = null;
+    [SerializeField] private TextMeshProUGUI txtTimerToNewCityBLock     = null;
 
 
     private static GameManager gm => GameManager.Instance;
@@ -18,7 +19,7 @@ public class UITopPanel : MonoBehaviour
     {
         gm.onLvlChanged += new_lvl => initXpBar();
         gm.onXpChanged += new_lvl => setValXpBar();
-        gm.cityBlocksCountChanged += blocksCount => txtXpInfo.text = $"За один кожен домік ти отримуєш {gm.xpPerCityBlockPerSecond}xp/сек, всього: {blocksCount * gm.xpPerCityBlockPerSecond}xp/сек";
+        gm.cityBlocksCountChanged += blocksCount => txtXpInfo.text = $"{blocksCount * gm.xpPerCityBlockPerSecond}xp/сек ({gm.xpPerCityBlockPerSecond}xp/сек за будівлю)";
 
         barHealth.Initialize( gm.maxHealth );
         gm.onHealthChanged += health => barHealth.SetValue( health );
@@ -42,5 +43,10 @@ public class UITopPanel : MonoBehaviour
     private void setValXpBar()
     {
         barXp.SetValue( gm.xp - gm.lvlToXp( gm.lvl ) );
+    }
+
+    private void Update()
+    {
+        txtTimerToNewCityBLock.text = $"Час до наступного блоку: {(int)(gm.shapeSpawner.SpawnCoolDown - gm.shapeSpawner.timeToSpawn)}с";
     }
 }

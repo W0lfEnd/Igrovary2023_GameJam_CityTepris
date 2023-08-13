@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform gameoverPrefab        = null;
     [SerializeField] private RectTransform gameoverParent        = null;
     [SerializeField] private UIUpgradePanel upgradePanel = null;
+    [SerializeField] public ShapeSpawner shapeSpawner = null;
+
     private int enemiesDied;
     private float startedPlayingAt;
     private bool hasEndedGame = false;
