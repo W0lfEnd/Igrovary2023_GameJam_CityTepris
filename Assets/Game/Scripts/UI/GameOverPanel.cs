@@ -28,9 +28,8 @@ namespace Game.Scripts.UI
 
 
             _enemiesKilledTextLabel.text = _enemiesKilledTextPrefix + GameManager.Instance.GetEnemiesDied();
-            _timeSurvivedTimeTextLabel.text = _timeSurvivedTimeTextPrefix +
-                                              string.Format(_timeSurvivedTimeTextPrefix,
-                                                  GameManager.Instance.GetPlayTime());
+            _timeSurvivedTimeTextLabel.text = string.Format(_timeSurvivedTimeTextPrefix,
+                GameManager.Instance.GetPlayTime());
         }
 
         private void InitializeRestartButton()
