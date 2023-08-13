@@ -8,8 +8,9 @@ using Random = System.Random;
 
 public class UIUpgradePanel : MonoBehaviour
 {
-    [SerializeField] private UIBtnSelectUpgrade btnFirst = null;
+    [SerializeField] private UIBtnSelectUpgrade btnFirst  = null;
     [SerializeField] private UIBtnSelectUpgrade btnSecond = null;
+    [SerializeField] private List<Sprite>       sprites   = null;
 
     private static GameManager gm => GameManager.Instance;
     private static TurretsController turretsController => GameManager.Instance.TurretControllers.FirstOrDefault();
@@ -41,6 +42,74 @@ public class UIUpgradePanel : MonoBehaviour
 
     public void tryToOpenPanel()
     {
+        Dictionary<int, UpgradeData> mocks = new  Dictionary<int, UpgradeData>()
+        {
+            [0] = new ()
+            {
+                id = 0,
+                sprite = sprites[1],
+                title = "Ріжучі леза лазерної заточки",
+                description = () => "леза, що будуть крутитись покругу центрального будинку",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.gameObject.SetActive( true ) )
+            },
+            [1] = new ()
+            {
+                id = 1,
+                sprite = sprites[4],
+                title = "Придбати потужну 'Пушку масового ураження'",
+                description = () => "стріляє патронами, які взриваються",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.gameObject.SetActive( true ) )
+            },
+            [2] = new ()
+            {
+                id = 2,
+                sprite = sprites[0],
+                title = "Додаткове лезо (+1)",
+                description = () => $"наявна кількість лез: {GameManager.Instance.TurretControllers[0].blade_storm.bladesCount}",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.bladesCount++ )
+            },
+            [3] = new ()
+            {
+                id = 3,
+                sprite = sprites[6],
+                title = "Пришвидшити 'Дефолтну зброю'",
+                description = () => "+1 в секунду",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttacksPerSecond++  )
+            },
+            [4] = new ()
+            {
+                id = 4,
+                sprite = sprites[5],
+                title = "Збільшити радіус 'Дефолтної зброї'",
+                description = () => "+20%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
+            },
+            [5] = new ()
+            {
+                id = 5,
+                sprite = sprites[7],
+                title = "Пришвидшити 'Пушку масового ураження'",
+                description = () => "+1 в секунду",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttacksPerSecond++  )
+            },
+            [6] = new ()
+            {
+                id = 6,
+                sprite = sprites[3],
+                title = "Збільшити радіус 'Пушки масового ураження'",
+                description = () => "+20%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttackRange *= 1.2f  )
+            },
+            [7] = new ()
+            {
+                id = 7,
+                sprite = sprites[2],
+                title = "Збільшити радіус взриву 'Пушки масового ураження'",
+                description = () => "+40%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.ExplosionRange *= 1.4f  )
+            },
+        };
+
         List<int> available_to_upgrade_list = mocks.Keys.Where( canUpgrade ).Where( it => !alreadyUpgraded.Contains( it ) ).ToList();
         if ( available_to_upgrade_list.Count == 0 )
             return;
@@ -84,66 +153,6 @@ public class UIUpgradePanel : MonoBehaviour
         return true;
     }
 
-    private Dictionary<int, UpgradeData> mocks = new  Dictionary<int, UpgradeData>()
-    {
-        [0] = new ()
-        {
-            id = 0,
-            title = "Ріжучі леза лазерної заточки",
-            description = () => "леза, що будуть крутитись покругу центрального будинку",
-            onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.gameObject.SetActive( true ) )
-        },
-        [1] = new ()
-        {
-            id = 1,
-            title = "Придбати потужну 'Пушку масового ураження'",
-            description = () => "стріляє патронами, які взриваються",
-            onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.gameObject.SetActive( true ) )
-        },
-        [2] = new ()
-        {
-            id = 2,
-            title = "Додаткове лезо (+1)",
-            description = () => $"наявна кількість лез: {GameManager.Instance.TurretControllers[0].blade_storm.bladesCount}",
-            onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.bladesCount++ )
-        },
-        [3] = new ()
-        {
-            id = 3,
-            title = "Пришвидшити 'Дефолтну зброю'",
-            description = () => "+1 в секунду",
-            onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttacksPerSecond++  )
-        },
-        [4] = new ()
-        {
-            id = 4,
-            title = "Збільшити радіус 'Дефолтної зброї'",
-            description = () => "+20%",
-            onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
-        },
-        [5] = new ()
-        {
-            id = 5,
-            title = "Пришвидшити 'Пушку масового ураження'",
-            description = () => "+1 в секунду",
-            onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttacksPerSecond++  )
-        },
-        [6] = new ()
-        {
-            id = 6,
-            title = "Збільшити радіус 'Пушки масового ураження'",
-            description = () => "+20%",
-            onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttackRange *= 1.2f  )
-        },
-        [7] = new ()
-        {
-            id = 7,
-            title = "Збільшити радіус взриву 'Пушки масового ураження'",
-            description = () => "+40%",
-            onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.ExplosionRange *= 1.4f  )
-        },
-    };
-    
 
     public class UpgradeData
     {
