@@ -80,4 +80,4 @@ MonoBehaviour:
   go_blade: {fileID: -2924865371876926004, guid: ba986adca2ad87b44aed983f6ab3acbd, type: 3}
   Damage: 2
   RotationSpeedInDeg: 45
-  AttackRadius: 2
+  _AttackRadius: 3

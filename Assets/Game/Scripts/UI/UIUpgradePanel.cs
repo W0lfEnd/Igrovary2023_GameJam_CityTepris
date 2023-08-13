@@ -81,8 +81,8 @@ public class UIUpgradePanel : MonoBehaviour
                 id = 4,
                 sprite = sprites[5],
                 title = "Збільшити радіус 'Арбалету'",
-                description = () => "+20%",
-                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
+                description = () => "+40%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.4f  )
             },
             [5] = new ()
             {
@@ -113,16 +113,16 @@ public class UIUpgradePanel : MonoBehaviour
                 id = 8,
                 sprite = sprites[3],
                 title = "Збільшити радіус 'Пушки'",
-                description = () => "+20%",
-                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttackRange *= 1.2f  )
+                description = () => "+35%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttackRange *= 1.35f  )
             },
             [9] = new ()
             {
                 id = 9,
                 sprite = sprites[3],
                 title = "Збільшити радіус 'Пушки'",
-                description = () => "+20%",
-                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttackRange *= 1.2f  )
+                description = () => "+40%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.canon.AttackRange *= 1.4f  )
             },
             [10] = new ()
             {
@@ -137,24 +137,24 @@ public class UIUpgradePanel : MonoBehaviour
                 id = 11,
                 sprite = sprites[5],
                 title = "Збільшити радіус 'Арбалету'",
-                description = () => "+20%",
-                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
+                description = () => "+35%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.35f  )
             },
             [12] = new ()
             {
                 id = 12,
                 sprite = sprites[5],
                 title = "Збільшити радіус 'Арбалету'",
-                description = () => "+20%",
-                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
+                description = () => "+35%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.35f  )
             },
             [13] = new ()
             {
                 id = 13,
                 sprite = sprites[5],
                 title = "Збільшити радіус 'Арбалету'",
-                description = () => "+20%",
-                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.2f  )
+                description = () => "+40%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.turret.AttackRange *= 1.4f  )
             },
             [14] = new ()
             {
@@ -178,15 +178,15 @@ public class UIUpgradePanel : MonoBehaviour
                 sprite = sprites[1],
                 title = "Збільшити радіус 'Ріжучих лез'",
                 description = () => "+50%",
-                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.AttackRadius *= 1.3f )
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.AttackRadius *= 1.5f )
             },
             [17] = new ()
             {
                 id = 17,
                 sprite = sprites[1],
                 title = "Збільшити радіус 'Ріжучих лез'",
-                description = () => "+50%",
-                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.AttackRadius *= 1.5f )
+                description = () => "+60%",
+                onClickAction = () => GameManager.Instance.TurretControllers.ForEach( it => it.blade_storm.AttackRadius *= 1.6f )
             },
             [18] = new ()
             {
@@ -245,6 +245,7 @@ public class UIUpgradePanel : MonoBehaviour
 
             case 16: return turretsController.blade_storm.gameObject.activeSelf;
             case 17: return turretsController.blade_storm.gameObject.activeSelf;
+            case 18: return turretsController.blade_storm.gameObject.activeSelf;
         }
 
         return true;
