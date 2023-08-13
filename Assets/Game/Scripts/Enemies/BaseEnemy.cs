@@ -10,6 +10,7 @@ namespace Enemies
     public class BaseEnemy : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Animation _animationComponent;
 
         [Header("Don't touch this, this is SOLID")]
         public BoxCollider2D boxCollider;
@@ -25,6 +26,8 @@ namespace Enemies
         private float _defaultMovementSpeed;
         private float _currentMovementSpeed;
         private bool _isMovementSpeedIncreased;
+
+        private AnimationClip _animationClip;
 
         private Dimension _currentDimension;
 
@@ -44,7 +47,6 @@ namespace Enemies
             }
         }
 
-
         public void Initialize(EnemyData enemyData, Dimension spawnDimension, BuildingsDistancer buildingsDistancer)
         {
             SetData(enemyData, spawnDimension);
@@ -52,12 +54,15 @@ namespace Enemies
 
             gameObject.SetActive(true);
             boxCollider.enabled = true;
+
+            SetActiveAnimation(true);
         }
 
         public void SetActiveDragging(bool isActive)
         {
             isDragged = isActive;
             boxCollider.enabled = !isActive;
+            SetActiveAnimation(!isActive);
         }
 
         public void Damage(int damage)
@@ -134,6 +139,8 @@ namespace Enemies
             _defaultMovementSpeed = enemyData.movementSpeed;
             _currentMovementSpeed = enemyData.movementSpeed;
 
+            _animationClip = enemyData.animationClip;
+
             _currentDimension = spawnDimension;
         }
 
@@ -172,6 +179,21 @@ namespace Enemies
             gameObject.SetActive(false);
 
             GameManager.Instance.xp += 8;
+        }
+
+        private void SetActiveAnimation(bool isActive)
+        {
+            _animationComponent.clip = _animationClip;
+
+            if (isActive)
+            {
+                _animationComponent.clip = _animationClip;
+                _animationComponent.Play();
+            }
+            else
+            {
+                _animationComponent.Stop();
+            }
         }
 
         private IEnumerator DelayedAction(float delay, Action callback)
