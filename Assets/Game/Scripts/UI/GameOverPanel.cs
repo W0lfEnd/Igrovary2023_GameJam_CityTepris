@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -24,6 +25,7 @@ namespace Game.Scripts.UI
 
         private void Initialize()
         {
+            Time.timeScale = 0;
             InitializeRestartButton();
 
 
@@ -40,6 +42,11 @@ namespace Game.Scripts.UI
                 var scene = SceneManager.GetActiveScene();
                 SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
             }));
+        }
+
+        private void OnDisable()
+        {
+            Time.timeScale = 1;
         }
     }
 }

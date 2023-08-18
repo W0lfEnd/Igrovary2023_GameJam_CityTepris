@@ -87,8 +87,8 @@ public class GameManager : MonoBehaviour
        hasEndedGame = true;
        var gameover = Instantiate(gameoverPrefab,gameoverParent);
 
-       Time.timeScale = 0;
        FindObjectOfType<ShapeSpawner>().enabled = false;
+       
     }
     public void OnEnemyDied()
     {
@@ -196,7 +196,11 @@ public class GameManager : MonoBehaviour
          }
       }
    }
-   private int _health = 0;
+
+   private void forceInvokeHpChanged() => health = health;
+
+   [Watcher( "forceInvokeHpChanged" )]
+   [SerializeField] private int _health = 0;
 
    public int maxHealth = 1000;
    #endregion
